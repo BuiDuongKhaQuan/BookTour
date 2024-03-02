@@ -77,24 +77,18 @@ function Header() {
                 </Link>
 
                 <div className={cx('center')}>
-                    {/* <Menu items={MENU}>
-                        <div className={cx('menu_item')}>
-                            <h6>s</h6>
-                            <CaretDown size={20} weight="light" />
-                        </div>
-                    </Menu> */}
                     {MENU.map((result) =>
                         result.children ? (
                             <Menu items={result.children ? result.children.data : []}>
-                                <div className={cx('menu_item')}>
+                                <Link to={result.to} className={cx('menu_item')}>
                                     <h6>{result.title}</h6>
                                     <CaretDown size={20} weight="light" />
-                                </div>
+                                </Link>
                             </Menu>
                         ) : (
-                            <div className={cx('menu_item')}>
+                            <Link to={result.to} className={cx('menu_item')}>
                                 <h6>{result.title}</h6>
-                            </div>
+                            </Link>
                         ),
                     )}
                 </div>
