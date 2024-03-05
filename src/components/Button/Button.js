@@ -58,9 +58,9 @@ function Button({
 
     return (
         <Comp className={classes} {...props}>
-            {leftIcon && <>{leftIcon}</>}
-            <span className={cx('title')}>{children}</span>
-            {rightIcon && <>{rightIcon}</>}
+            {leftIcon && <div className={cx('icon')}>{leftIcon}</div>}
+            {children && <span className={cx('title')}>{children}</span>}
+            {rightIcon && <div className={cx('icon')}>{rightIcon}</div>}
         </Comp>
     );
 }
@@ -78,7 +78,7 @@ Button.propTypes = {
     disabled: PropTypes.bool,
     leftIcon: PropTypes.node,
     rightIcon: PropTypes.node,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
     onClick: PropTypes.func,
 };
 

@@ -5,10 +5,9 @@
 }
 .container {
     margin-top: var(--dafault-layout-header-height);
-    width: var(--dafault-layout-with);
+    width: 100%;
     display: flex;
 }
 .content {
     flex: 1;
-    background-color: bisque;
 }
