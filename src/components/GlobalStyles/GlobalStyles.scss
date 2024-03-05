@@ -3,13 +3,15 @@
 :root {
     --black: #000;
     --white: #fff;
-    --body-color: #687179;
+    --text-p-color: #687179;
+    --body-color: #e5fdfd;
     --text-color: #333;
     --primary-color: #3cb371;
-    --font-family: 'TikTokFont', sans-serif;
+    --font-family: 'Roboto', sans-serif;
+    --title-color: #161921;
     //Dafault layout
     --dafault-layout-header-height: 100px;
-    --dafault-layout-with: 1150px;
+    --dafault-layout-with: 1760px;
 }
 
 html {
@@ -28,18 +30,31 @@ body {
     line-height: 1.5;
     text-rendering: optimizeSpeed;
     color: var(--text-color);
-    overflow-y: overlay;
+    background-color: var(--body-color);
+    overflow-x: hidden;
+}
+img,
+svg {
+    vertical-align: middle;
 }
 
+p {
+    font-family: 'Roboto', sans-serif;
+}
+
+h2 {
+    font-family: 'PlayfairDisplay', sans-serif;
+    font-size: 45px;
+}
 //Scrollbar css
-html *::-webkit-scrollbar {
-    border-radius: 0;
-    width: 8px;
-}
-html *::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: rgba(22, 24, 35, 0.06);
-}
+// html *::-webkit-scrollbar {
+//     border-radius: 0;
+//     width: 8px;
+// }
+// html *::-webkit-scrollbar-thumb {
+//     border-radius: 4px;
+//     background-color: rgba(22, 24, 35, 0.06);
+// }
 
 button,
 input,
@@ -54,30 +69,22 @@ a {
 }
 
 //Font emmbedded
+
 @font-face {
-    font-family: TikTokFont;
-    src: url('/asstes/fonts/TikTokDisplayFont-Bold.woff2');
+    font-family: DancingScript;
+    src: url('/assets/fonts/DancingScript-VariableFont_wght.ttf');
     font-weight: 700;
 }
+
 @font-face {
-    font-family: TikTokFont;
-    src: url('/asstes/fonts/TikTokDisplayFont-Semibold.woff2');
-    font-weight: 600;
-}
-@font-face {
-    font-family: TikTokFont;
-    src: url('/asstes/fonts/TikTokFont-Bold.woff2');
+    font-family: PlayfairDisplay;
+    src: url('/assets/fonts/PlayfairDisplay-VariableFont_wght.ttf');
     font-weight: 700;
 }
+
 @font-face {
-    font-family: TikTokFont;
-    src: url('/asstes/fonts/TikTokFont-Regular.woff2');
-    font-weight: 400;
-}
-@font-face {
-    font-family: TikTokFont;
-    src: url('/asstes/fonts/TikTokFont-Semibold.woff2');
-    font-weight: 600;
+    font-family: Roboto;
+    src: url('/assets/fonts/Roboto-Regular.ttf');
 }
 //custom tippy
 

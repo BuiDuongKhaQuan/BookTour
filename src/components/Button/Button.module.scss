@@ -104,15 +104,15 @@
 .circle {
     width: 55px;
     height: 55px;
-    border: 0.5px solid var(--body-color);
+    border: 0.5px solid var(--text-color);
     border-radius: 50%;
     padding: 0;
     min-width: 0;
     box-shadow: inset 100% 0 0 0 0 var(--primary-color);
-
+    background-color: transparent;
     &:hover {
         color: var(--white);
-        background-color: var(--primary-color);
-        border-color: var(--primary-color);
+        background-color: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
     }
 }

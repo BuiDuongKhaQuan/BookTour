@@ -1,31 +1,12 @@
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
-import images from '~/asstes/images';
-import Tippy from '@tippyjs/react';
+import images from '~/assets/images';
 import 'tippy.js/dist/tippy.css';
 import { Link } from 'react-router-dom';
-
-import {
-    CoinsIcon,
-    DarkModeIcon,
-    FavoritesIcon,
-    FeedbackIcon,
-    InboxIcon,
-    KeyboardIcon,
-    LanguageIcon,
-    LiveHubIcon,
-    LogOutIcon,
-    MessageIcon,
-    PlusIcon,
-    SetttingIcon,
-    UserIcon,
-} from '~/components/Icons';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
-import Image from '~/components/Image';
-import Search from '../Search';
 import config from '~/config';
-import { ArrowDown, CaretDown, List, MagnifyingGlass } from '@phosphor-icons/react';
+import { CaretDown, List, MagnifyingGlass } from '@phosphor-icons/react';
 
 const cx = classNames.bind(styles);
 
@@ -48,12 +29,15 @@ const MENU = [
             data: [
                 {
                     title: 'About us',
+                    to: '/about-us',
                 },
                 {
                     title: 'Team',
+                    to: '/team',
                 },
                 {
                     title: 'Gallery',
+                    to: '/gallery',
                 },
             ],
         },
@@ -70,23 +54,23 @@ const MENU = [
 
 function Header() {
     return (
-        <h2 className={cx('warpper')}>
+        <div className={cx('warpper')}>
             <div className={cx('inner')}>
                 <Link to={config.routes.home} className={cx('logo')}>
                     <img src={images.logo} alt="logo" className={cx('logo_image')} />
                 </Link>
 
                 <div className={cx('center')}>
-                    {MENU.map((result) =>
+                    {MENU.map((result, index) =>
                         result.children ? (
-                            <Menu items={result.children ? result.children.data : []}>
+                            <Menu items={result.children ? result.children.data : []} key={index}>
                                 <Link to={result.to} className={cx('menu_item')}>
                                     <h6>{result.title}</h6>
                                     <CaretDown size={20} weight="light" />
                                 </Link>
                             </Menu>
                         ) : (
-                            <Link to={result.to} className={cx('menu_item')}>
+                            <Link to={result.to} className={cx('menu_item')} key={index}>
                                 <h6>{result.title}</h6>
                             </Link>
                         ),
@@ -101,7 +85,7 @@ function Header() {
                     </Button>
                 </div>
             </div>
-        </h2>
+        </div>
     );
 }
 
