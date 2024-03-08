@@ -7,13 +7,23 @@ import Button from '~/components/Button';
 import {
     ArrowLeft,
     ArrowRight,
+    ArrowUpRight,
+    Calendar,
     CalendarBlank,
+    Clock,
     CurrencyDollarSimple,
+    HeartStraight,
     MapPin,
     PersonSimpleBike,
+    Star,
+    Tag,
+    Users,
 } from '@phosphor-icons/react';
 import SupTitle from '~/components/SupTitle';
 import SliderCard from '~/components/SliderCard';
+import { Link } from 'react-router-dom';
+import Image from '~/components/Image';
+import { useRef } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -227,6 +237,92 @@ function Home() {
         },
     ];
 
+    const LIST_DOT = [
+        { trip: '6+ Trips', position: { top: '0%', left: '25%' } },
+        { trip: '16+ Trips', position: { top: '30%', left: '10%' } },
+        { trip: '5+ Trips', position: { top: '40%', left: '28%' } },
+        { trip: '2+ Trips', position: { bottom: '0%', left: '28%' } },
+        { trip: '8+ Trips', position: { bottom: '30%', left: '27%' } },
+        { trip: '7+ Trips', position: { top: '50%', right: '30%' } },
+        { trip: '10+ Trips', position: { top: '22%', right: '22%' } },
+        { trip: '12+ Trips', position: { right: '13%', bottom: '25%' } },
+    ];
+
+    const DATA_TOURS = [
+        {
+            name: 'Bali One Life Adventure',
+            img: images.tour_1_1,
+            position: 'Lasvegus, USA',
+            persion: '52+',
+            day: '07',
+            price: '350',
+            review: 5,
+        },
+        {
+            name: 'Places To Travel November',
+            img: images.tour_1_2,
+            position: ' Barcelona, Spain',
+            persion: '100+',
+            day: '13',
+            price: '350',
+            review: 5,
+        },
+        {
+            name: 'Brooklyn Beach Resort Tour',
+            img: images.tour_1_3,
+            position: ' Madrid, Spain',
+            persion: '50+',
+            day: '10',
+            price: '650',
+            review: 5,
+        },
+        {
+            name: 'Brooklyn Christmas Lights',
+            img: images.tour_1_4,
+            position: ' Lasvegus, USA',
+            persion: '312+',
+            day: '15',
+            price: '450',
+            review: 5,
+        },
+    ];
+
+    const DATA_TEAM = [
+        {
+            name: 'Quan Bui',
+            img: images.ceo,
+            content:
+                'Corporate empowered eeamlessly e-enable highly efficient procedure after cross-media strategic theme areas. Enthusiastically formulate meta-services e-services. Quickly optimize future-proof markets through testing',
+        },
+        {
+            name: 'Thai Tran',
+            img: images.ceo_1,
+            content:
+                'The advance of technology is based on making it fit in so that you don"t really even notice it, so it"s part of everyday life.',
+        },
+    ];
+
+    const DATA_NEWS = [
+        {
+            title: 'Bali One Life Adventure',
+            img: images.tour_1_1,
+            position: 'Lasvegus, USA',
+            time: '15 July, 2023',
+        },
+        {
+            title: 'Bali One Life Adventure',
+            img: images.tour_1_1,
+            position: 'Lasvegus, USA',
+            time: '15 July, 2023',
+        },
+        {
+            title: 'Bali One Life Adventure',
+            img: images.tour_1_1,
+            position: 'Lasvegus, USA',
+            time: '15 July, 2023',
+        },
+    ];
+
     const ServiceItem = ({ data, content }) =>
         data.map((result, index) => (
             <div className={cx('container_service')} key={index}>
@@ -252,6 +348,157 @@ function Home() {
                 </div>
             </div>
         ));
+
+    const Dot = ({ data }) =>
+        data.map((reslut, index) => (
+            <div className={cx('dot')} style={reslut.position} key={index}>
+                <a href="tour.html" className={cx('trips')}>
+                    {reslut.trip}
+                </a>
+            </div>
+        ));
+
+    const TourItem = ({ data }) => (
+        <SliderCard slidesToShow={4}>
+            {data.map((reslut, index) => (
+                <div key={index}>
+                    <div className={cx('tours_item')}>
+                        <div className={cx('tour_img')}>
+                            <Image animation src={reslut.img} alt={reslut.name} />
+                            <span className={cx('tour_like')}>
+                                <HeartStraight size={20} weight="bold" color="#ffffff" />
+                            </span>
+                        </div>
+                        <div className={cx('tour_information')}>
+                            <div className={cx('location_re')}>
+                                <div className={cx('location')}>
+                                    <MapPin size={20} weight="bold" color="#3cb371" />
+                                    {reslut.position}
+                                </div>
+                                <div className={cx('review')}>
+                                    <Star size={20} weight="fill" color="#FFB539" />
+                                    <Star size={20} weight="fill" color="#FFB539" />
+                                    <Star size={20} weight="fill" color="#FFB539" />
+                                    <Star size={20} weight="fill" color="#FFB539" />
+                                    <Star size={20} weight="fill" color="#FFB539" />
+                                </div>
+                            </div>
+                            <h3>{reslut.name}</h3>
+                            <div className={cx('day_persion')}>
+                                <span className={cx('day_persion_item')}>
+                                    <Clock size={20} color="#3cb371" />
+                                    {reslut.day}
+                                </span>
+                                <span className={cx('day_persion_item')}>
+                                    <Users size={20} color="#3cb371" />
+                                    {reslut.persion}
+                                </span>
+                            </div>
+                            <div className={cx('tour_price')}>
+                                <span className={cx('price_box')}>
+                                    From
+                                    <span className={cx('price')}> ${reslut.price}</span>
+                                </span>
+                                <Link className={cx('detail')}>
+                                    SEE DETAILS
+                                    <ArrowUpRight
+                                        size={18}
+                                        className={cx('detail_icon')}
+                                        color="#3cb371"
+                                        weight="bold"
+                                    />
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </SliderCard>
+    );
+
+    const sliderRef1 = useRef(null);
+    const nextSlide1 = () => {
+        sliderRef1.current.slickNext(); // Gọi hàm slickNext() từ ref
+    };
+
+    const previousSlide1 = () => {
+        sliderRef1.current.slickPrev(); // Gọi hàm slickPrev() từ ref
+    };
+
+    const sliderRef = useRef(null);
+    const nextSlide = () => {
+        sliderRef.current.slickNext(); // Gọi hàm slickNext() từ ref
+    };
+
+    const previousSlide = () => {
+        sliderRef.current.slickPrev(); // Gọi hàm slickPrev() từ ref
+    };
+
+    const TeamItem = ({ data }) => (
+        <SliderCard
+            sliderProps={{
+                fade: true,
+                waitForAnimate: false,
+            }}
+            ref={sliderRef}
+        >
+            {data.map((result, index) => (
+                <div className={cx('team_box_account')} key={index}>
+                    <Image
+                        pointer
+                        circle
+                        width="80px"
+                        height="80px"
+                        src={result.img}
+                        alt="Img CEO"
+                        className={cx('avatar')}
+                    />
+                    <div className={cx('information')}>
+                        <p>“{result.content}”</p>
+                    </div>
+                    <div className={cx('start')}>
+                        <Star size={20} weight="fill" color="#3cb371" />
+                        <Star size={20} weight="fill" color="#3cb371" />
+                        <Star size={20} weight="fill" color="#3cb371" />
+                        <Star size={20} weight="fill" color="#3cb371" />
+                        <Star size={20} weight="fill" color="#3cb371" />
+                    </div>
+                    <h2>{result.name}</h2>
+                    <p>CEO of Travel</p>
+                </div>
+            ))}
+        </SliderCard>
+    );
+
+    const NewItem = ({ data }) => (
+        <SliderCard slidesToShow={3}>
+            {data.map((result, index) => (
+                <div className={cx('new_item')} key={index}>
+                    {!!(index % 2) && <Image animation className={cx('new_img')} src={result.img} alt={result.title} />}
+                    <div className={cx('new_information')}>
+                        <div className={cx('new_item_time')}>
+                            <span className={cx('time')}>
+                                <Tag size={18} weight="duotone" color="#3cb371" />
+                                {result.position}
+                            </span>
+                            <span className={cx('location')}>
+                                <Calendar size={18} weight="duotone" color="#3cb371" />
+                                {result.time}
+                            </span>
+                        </div>
+                        <h3 className={cx('new_title')}>
+                            <Link>{result.title}</Link>
+                        </h3>
+                        <Link className={cx('new_read_more')}>
+                            READ MORE
+                            <ArrowUpRight size={18} className={cx('detail_icon')} color="#3cb371" weight="bold" />
+                        </Link>
+                    </div>
+                    {!!(index % 2) || <Image animation className={cx('new_img')} src={result.img} alt={result.title} />}
+                </div>
+            ))}
+        </SliderCard>
+    );
 
     return (
         <div className={cx('warpper')}>
@@ -304,8 +551,8 @@ function Home() {
             <div className={cx('category')}>
                 <SupTitle left right primary small title={'Categories'} />
                 <h2>Browse By Destination Category</h2>
-                <div className={cx('category_row')}>
-                    <SliderCard window slides={DATA_SLIDER} />
+                <div className={cx('_row')}>
+                    <SliderCard animation window slides={DATA_SLIDER} slidesToShow={6} />
                 </div>
             </div>
             <div className={cx('aboutus')}>
@@ -349,61 +596,70 @@ function Home() {
             <div className={cx('destination', 'category')}>
                 <SupTitle left right primary small title={'Top Destinations'} />
                 <h2>Popular Destinations</h2>
-                <div className={cx('destination_row')}>
+                <div className={cx('_row')}>
                     <SliderCard
+                        animation
                         large
                         tripSmall
+                        slidesToShow={4}
                         iconLeftName={<MapPin size={30} weight="fill" color="#3cb371" />}
                         slides={DATA_DESTINATION}
                     />
                 </div>
             </div>
-            <div className={cx('offers')}>
-                <div className={cx('offers_background')} style={{ backgroundImage: `url(${images.pattern_bg_2})` }}>
-                    <div className={cx('offers_left')} style={{ backgroundImage: `url(${images.pattern_bg_3})` }}>
-                        <img src={images.offer_1} alt="Img" />
-                        <ul className={cx('offers_countdown')}>
-                            <li>
-                                <div className={cx('count_number')}>00</div>
-                                <span>Days</span>
-                            </li>
-                            <li>
-                                <div className={cx('count_number')}>00</div>
-                                <span>Housr</span>
-                            </li>
-                            <li>
-                                <div className={cx('count_number')}>00</div>
-                                <span>Minutes</span>
-                            </li>
-                            <li>
-                                <div className={cx('count_number')}>00</div>
-                                <span>Senconds</span>
-                            </li>
-                        </ul>
+            <div className={cx('offers')} style={{ backgroundImage: `url(${images.pattern_bg_2})` }}>
+                <div className={cx('offers_left')} style={{ backgroundImage: `url(${images.pattern_bg_3})` }}>
+                    <img src={images.offer_1} alt="Img" />
+                    <ul className={cx('offers_countdown')}>
+                        <li>
+                            <div className={cx('count_number')}>00</div>
+                            <span>Days</span>
+                        </li>
+                        <li>
+                            <div className={cx('count_number')}>00</div>
+                            <span>Housr</span>
+                        </li>
+                        <li>
+                            <div className={cx('count_number')}>00</div>
+                            <span>Minutes</span>
+                        </li>
+                        <li>
+                            <div className={cx('count_number')}>00</div>
+                            <span>Senconds</span>
+                        </li>
+                    </ul>
+                </div>
+                <div className={cx('offers_right')}>
+                    <div className={cx('offers_header')}>
+                        <div className={cx('header_title')}>
+                            <SupTitle right small title={'Deals & Offers'} />
+                            <h2>Last Minute Amazing Deals</h2>
+                        </div>
+                        <div className={cx('arrow_list')}>
+                            <Button
+                                onClick={previousSlide1}
+                                className={cx('arrow_button')}
+                                circle
+                                leftIcon={<ArrowLeft size={22} weight="bold" />}
+                            />
+                            <Button
+                                onClick={nextSlide1}
+                                className={cx('arrow_button')}
+                                circle
+                                leftIcon={<ArrowRight size={22} weight="bold" />}
+                            />
+                        </div>
                     </div>
-
-                    <div className={cx('offers_right')}>
-                        <div className={cx('offers_header')}>
-                            <div className={cx('header_title')}>
-                                <SupTitle right small title={'Deals & Offers'} />
-                                <h2>Last Minute Amazing Deals</h2>
-                            </div>
-                            <div className={cx('arrow_list')}>
-                                <Button
-                                    className={cx('arrow_button')}
-                                    circle
-                                    leftIcon={<ArrowLeft size={22} weight="bold" />}
-                                />
-                                <Button
-                                    className={cx('arrow_button')}
-                                    circle
-                                    leftIcon={<ArrowRight size={22} weight="bold" />}
-                                />
-                            </div>
-                        </div>
-                        <div className={cx('offers_list')}>
-                            <SliderCard large textInImg sellOff slides={DATA_OFFERS} />
-                        </div>
+                    <div className={cx('offers_list')}>
+                        <SliderCard
+                            ref={sliderRef1}
+                            slidesToShow={3}
+                            animation
+                            large
+                            textInImg
+                            sellOff
+                            slides={DATA_OFFERS}
+                        />
                     </div>
                 </div>
             </div>
@@ -418,13 +674,95 @@ function Home() {
                         <div className={cx('map_mask_img')} style={{ maskImage: `url(${images.map_mask_1})` }}>
                             <img src={images.map_1} alt="Img" />
                         </div>
+                        <Dot data={LIST_DOT} />
                     </div>
                 </div>
             </div>
-            <div className={cx('featured')}></div>
-            <div className={cx('team')}></div>
-            <div className={cx('from')}></div>
-            <div className={cx('new')}></div>
+            <div className={cx('featured')} style={{ backgroundImage: `url(${images.tour_bg_1})` }}>
+                <div className={cx('featured_container')}>
+                    <div className={cx('featured_row')}>
+                        <div className={cx('title')}>
+                            <SupTitle primary right small title={'Featured Tours'} />
+                            <h2>Most Popular Tours</h2>
+                        </div>
+                        <Button primary large>
+                            View All Tours
+                        </Button>
+                    </div>
+                    <div className={cx('featured_tour')}>
+                        <TourItem data={DATA_TOURS} />
+                    </div>
+                </div>
+            </div>
+            <div
+                className={cx('team', 'destination', 'category')}
+                style={{ backgroundImage: `url(${images.bg_map_3})` }}
+            >
+                <SupTitle left right primary small title={'Testimonials'} />
+                <h2>What Our Customer Say</h2>
+                <div className={cx('team_box')}>
+                    <div className={cx('team_box_arrow')}>
+                        <Button onClick={previousSlide} circle leftIcon={<ArrowLeft fontSize={20} />} />
+                    </div>
+                    <div className={cx('team_box_slider')}>
+                        <TeamItem data={DATA_TEAM} />
+                    </div>
+                    <div className={cx('team_box_arrow')}>
+                        <Button onClick={nextSlide} circle leftIcon={<ArrowRight fontSize={20} />} />
+                    </div>
+                </div>
+                <Image
+                    pointer
+                    circle
+                    width="80px"
+                    height="80px"
+                    src={images.ceo}
+                    alt="Img CEO"
+                    className={cx('avatar_')}
+                    style={{ top: '32%', left: '25%' }}
+                />
+                <Image
+                    pointer
+                    circle
+                    width="80px"
+                    height="80px"
+                    src={images.ceo_1}
+                    alt="Img CEO"
+                    className={cx('avatar_')}
+                    style={{ top: '32%', right: '25%' }}
+                />
+            </div>
+            <div className={cx('form')}>
+                <div className={cx('form_container')}>
+                    <div className={cx('form_wrap')}>
+                        <Image className={cx('form_img')} src={images.subscribe_1} alt={'Img subcribe'} />
+                        <div className={cx('form_content')}>
+                            <h2>Get Special Offers And More From Travon</h2>
+                            <p>Sign up now and get the best deals straight in your inbox!</p>
+                            <form className={cx('form_input')}>
+                                <input placeholder="Enter Email Address" className={cx('input_email')} />
+                                <Button primary large>
+                                    SUBCRIBE
+                                </Button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className={cx('new')}>
+                <div className={cx('new_suptitle')}>
+                    <div>
+                        <SupTitle right primary small title={'News & Updates'} />
+                        <h2>Our Latest News & Articles</h2>
+                    </div>
+                    <Button large primary>
+                        VIEW ALL POST
+                    </Button>
+                </div>
+                <div className={cx('new_slider')}>
+                    <NewItem data={DATA_NEWS} />
+                </div>
+            </div>
         </div>
     );
 }
