@@ -35,6 +35,17 @@ const images = {
     tour_3_5: require('~/assets/images/tour_3_5.jpg'),
     map_mask_1: require('~/assets/images/map_mask_1.png'),
     map_1: require('~/assets/images/map_1.jpg'),
+    tour_bg_1: require('~/assets/images/tour_bg_1.jpg'),
+    tour_1_1: require('~/assets/images/tour_1_1.jpg'),
+    tour_1_2: require('~/assets/images/tour_1_2.jpg'),
+    tour_1_3: require('~/assets/images/tour_1_3.jpg'),
+    tour_1_4: require('~/assets/images/tour_1_4.jpg'),
+    tour_1_5: require('~/assets/images/tour_1_5.jpg'),
+    bg_map_3: require('~/assets/images/bg_map_3.png'),
+    ceo: require('~/assets/images/ceo.jpg'),
+    ceo_1: require('~/assets/images/ceo_1.jpg'),
+    subscribe_1: require('~/assets/images/subscribe_1.jpg'),
+    footer_bg_1: require('~/assets/images/footer_bg_1.png'),
 };
 
 export default images;
