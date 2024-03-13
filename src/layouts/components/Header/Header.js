@@ -39,6 +39,10 @@ const MENU = [
                     title: 'Gallery',
                     to: '/gallery',
                 },
+                {
+                    title: 'ERROR-404',
+                    to: '/404-error',
+                },
             ],
         },
     },

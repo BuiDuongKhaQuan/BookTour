@@ -10,6 +10,7 @@ import Gallery from '~/pages/Gallery';
 import Team from '~/pages/Team';
 import Tour, { TourDetail } from '~/pages/Tour';
 import Destination, { DestinationDetail } from '~/pages/Destination';
+import Error404 from '~/pages/404/404Error';
 
 const publicRouters = [
     { path: config.routes.home, component: Home },
@@ -27,6 +28,7 @@ const publicRouters = [
     { path: config.routes.team_detail, component: Team },
     { path: config.routes.tour, component: Tour },
     { path: config.routes.tour_detail, component: TourDetail },
+    { path: config.routes.error_404, component: Error404 },
 ];
 
 const privateRoutes = [];

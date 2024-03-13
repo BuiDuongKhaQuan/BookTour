@@ -55,6 +55,7 @@ const images = {
     tour_4_5: require('~/assets/images/tour_4_5.jpg'),
     tour_4_6: require('~/assets/images/tour_4_6.jpg'),
     contact_shape: require('~/assets/images/contact_shape.png'),
+    error_img: require('~/assets/images/error_img.svg').default,
 };
 
 export default images;

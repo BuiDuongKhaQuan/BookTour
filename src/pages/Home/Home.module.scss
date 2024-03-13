@@ -120,6 +120,8 @@
         display: flex;
         gap: 5px;
         width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
 }
 
