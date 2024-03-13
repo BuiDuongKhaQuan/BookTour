@@ -1,5 +1,2 @@
-import React from 'react';
-
-export default function Tour() {
-    return <div>Tour</div>;
-}
+export { default } from './Tour';
+export { default as TourDetail } from '~/pages/Tour/TourDetail';

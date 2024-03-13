@@ -9,18 +9,15 @@ import {
     ArrowRight,
     ArrowUpRight,
     Calendar,
-    CalendarBlank,
-    Clock,
-    CurrencyDollarSimple,
-    HeartStraight,
     MapPin,
+    CalendarBlank,
+    CurrencyDollarSimple,
     PersonSimpleBike,
     Star,
     Tag,
-    Users,
 } from '@phosphor-icons/react';
 import SupTitle from '~/components/SupTitle';
-import SliderCard from '~/components/SliderCard';
+import SliderCard, { TourCardItem } from '~/components/SliderCard';
 import { Link } from 'react-router-dom';
 import Image from '~/components/Image';
 import { useRef } from 'react';
@@ -361,57 +358,7 @@ function Home() {
     const TourItem = ({ data }) => (
         <SliderCard slidesToShow={4}>
             {data.map((reslut, index) => (
-                <div key={index}>
-                    <div className={cx('tours_item')}>
-                        <div className={cx('tour_img')}>
-                            <Image animation src={reslut.img} alt={reslut.name} />
-                            <span className={cx('tour_like')}>
-                                <HeartStraight size={20} weight="bold" color="#ffffff" />
-                            </span>
-                        </div>
-                        <div className={cx('tour_information')}>
-                            <div className={cx('location_re')}>
-                                <div className={cx('location')}>
-                                    <MapPin size={20} weight="bold" color="#3cb371" />
-                                    {reslut.position}
-                                </div>
-                                <div className={cx('review')}>
-                                    <Star size={20} weight="fill" color="#FFB539" />
-                                    <Star size={20} weight="fill" color="#FFB539" />
-                                    <Star size={20} weight="fill" color="#FFB539" />
-                                    <Star size={20} weight="fill" color="#FFB539" />
-                                    <Star size={20} weight="fill" color="#FFB539" />
-                                </div>
-                            </div>
-                            <h3>{reslut.name}</h3>
-                            <div className={cx('day_persion')}>
-                                <span className={cx('day_persion_item')}>
-                                    <Clock size={20} color="#3cb371" />
-                                    {reslut.day}
-                                </span>
-                                <span className={cx('day_persion_item')}>
-                                    <Users size={20} color="#3cb371" />
-                                    {reslut.persion}
-                                </span>
-                            </div>
-                            <div className={cx('tour_price')}>
-                                <span className={cx('price_box')}>
-                                    From
-                                    <span className={cx('price')}> ${reslut.price}</span>
-                                </span>
-                                <Link className={cx('detail')}>
-                                    SEE DETAILS
-                                    <ArrowUpRight
-                                        size={18}
-                                        className={cx('detail_icon')}
-                                        color="#3cb371"
-                                        weight="bold"
-                                    />
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <TourCardItem data={reslut} key={index} />
             ))}
         </SliderCard>
     );
@@ -513,6 +460,9 @@ function Home() {
                             We always make our customer happy by providing as many choices possible for customers in
                             traveling.
                         </p>
+                        <Button primary large>
+                            GET STARTED
+                        </Button>
                     </div>
                 </div>
                 <div className={cx('tree_1')}>
@@ -536,7 +486,7 @@ function Home() {
                     <div className={cx('search_box')}>
                         <form action="mail.php" method="POST" className={cx('tour_search')}>
                             {DATA_SELECT.map((result) => (
-                                <Select data={result} key={result.id} />
+                                <Select className={cx('search_box-select')} data={result} key={result.id} />
                             ))}
                             <Button large primary>
                                 SEARCH
@@ -601,8 +551,8 @@ function Home() {
                         animation
                         large
                         tripSmall
-                        slidesToShow={4}
                         iconLeftName={<MapPin size={30} weight="fill" color="#3cb371" />}
+                        slidesToShow={4}
                         slides={DATA_DESTINATION}
                     />
                 </div>

@@ -46,6 +46,16 @@ const images = {
     ceo_1: require('~/assets/images/ceo_1.jpg'),
     subscribe_1: require('~/assets/images/subscribe_1.jpg'),
     footer_bg_1: require('~/assets/images/footer_bg_1.png'),
+    breadcumb_bg: require('~/assets/images/breadcumb-bg.jpg'),
+    subscribe_bg_1: require('~/assets/images/subscribe_bg_1.svg').default,
+    tour_4_1: require('~/assets/images/tour_4_1.jpg'),
+    tour_4_2: require('~/assets/images/tour_4_2.jpg'),
+    tour_4_3: require('~/assets/images/tour_4_3.jpg'),
+    tour_4_4: require('~/assets/images/tour_4_4.jpg'),
+    tour_4_5: require('~/assets/images/tour_4_5.jpg'),
+    tour_4_6: require('~/assets/images/tour_4_6.jpg'),
+    contact_shape: require('~/assets/images/contact_shape.png'),
+    error_img: require('~/assets/images/error_img.svg').default,
 };
 
 export default images;

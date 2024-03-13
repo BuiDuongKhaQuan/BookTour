@@ -1,5 +1,2 @@
-import React from 'react';
-
-export default function Blog() {
-    return <div>Blog</div>;
-}
+export { default } from './Blog';
+export { default as BlogDetail } from './BlogDetail';

@@ -12,7 +12,7 @@ const routes = {
     about_us: '/about-us',
     team: '/team',
     team_detail: '/team-detail',
-    error_404: '/error-404',
+    error_404: '/404-error',
     gallery: '/gallery',
     login: '/login',
 };

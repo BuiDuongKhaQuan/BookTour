@@ -1,37 +1,79 @@
 .footer_wrapper {
     width: 100%;
     background-color: #161921;
+    margin-top: 150px;
     .container {
-        padding: 120px 85px;
+        padding: 80px 85px 100px 85px;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         color: var(--white);
     }
-    .title {
-        font-size: 24px;
-        position: relative;
-        line-height: 1em;
-        margin: -0.1em 0 30px 0;
-        padding-bottom: 20px;
 
-        &::before,
-        &::after {
-            content: '';
-            height: 2px;
-            width: 60px;
-            background-color: var(--primary-color);
-            position: absolute;
-            bottom: 0;
-            left: 0;
-        }
-        &::after {
-            left: 65px;
-            width: 10px;
-        }
-    }
     .p_15 {
         padding: 0 15px;
+    }
+}
+.form_offer {
+    margin-top: -150px;
+    .offer_container {
+        margin: 0 85px;
+        color: var(--white);
+    }
+    .offer_background {
+        background-color: var(--primary-color);
+        border-radius: 30px;
+        background-size: 95% 95%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        padding: 50px 15px;
+        text-align: center;
+        position: relative;
+        z-index: 3;
+        p {
+            margin: 20px 0 30px 0;
+        }
+    }
+    .newsletter_form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 0 345px;
+
+        .form_group {
+            width: 100%;
+            position: relative;
+            background-color: var(--white);
+            border-radius: 5px;
+            .form_icon {
+                display: inline-block;
+                position: absolute;
+                right: 20px;
+                top: 19px;
+                font-size: 20px;
+                color: #93a5be;
+            }
+        }
+        .form_control {
+            padding: 0 20px;
+            width: 100%;
+            color: var(--black);
+            height: 56px;
+            padding-right: 45px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: ease-out 0.3s;
+            border: 1px solid transparent;
+            &:focus {
+                border-color: var(--black);
+            }
+        }
+        .form_btn {
+            height: 100%;
+            padding: 20px 20px;
+            background-color: var(--title-color);
+        }
     }
 }
 .slogan {
