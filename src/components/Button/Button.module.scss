@@ -4,37 +4,31 @@
     justify-content: center;
     border-radius: 4px;
     user-select: none;
-    min-width: 100px;
+    min-width: 50px;
     font-size: 1.4rem;
     background-color: var(--white);
     border: 1px solid transparent;
     font-weight: 600;
-    padding: 9px 28px;
     transition: ease-out 0.3s;
     position: relative;
     z-index: 1;
     cursor: pointer;
 
-    + .wrapper {
-        margin-left: 16px;
-    }
-
     &.disabled {
         pointer-events: none;
         opacity: 0.5;
     }
+    &:hover {
+        color: var(--white);
+        background-color: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
+    }
 }
 
-.rounded {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    border-color: rgba(22, 24, 35, 0.12);
-    color: rgba(22, 24, 35, 0.75);
-    border-radius: 999px;
-
-    &:hover {
-        border-color: rgba(22, 24, 35, 0.2);
-        background-color: rgba(255, 255, 255, 1);
-    }
+.square {
+    width: 50px;
+    height: 50px;
+    background-color: var(--smoke-color);
 }
 
 .icon + .title,
@@ -96,9 +90,8 @@
     min-width: 88px;
     padding: 4px 16px;
 }
-
 .large {
-    padding: 16px 20px;
+    padding: 20px 30px;
     min-width: 140px;
 }
 .circle {
@@ -110,9 +103,4 @@
     min-width: 0;
     box-shadow: inset 100% 0 0 0 0 var(--primary-color);
     background-color: transparent;
-    &:hover {
-        color: var(--white);
-        background-color: var(--primary-color) !important;
-        border-color: var(--primary-color) !important;
-    }
 }

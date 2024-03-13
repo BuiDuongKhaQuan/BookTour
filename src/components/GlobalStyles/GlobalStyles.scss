@@ -4,8 +4,9 @@
     --black: #000;
     --white: #fff;
     --text-p-color: #687179;
-    --body-color: #e5fdfd;
+    --body-color: #fafbfc;
     --text-color: #333;
+    --smoke-color: #f5f5f5;
     --primary-color: #3cb371;
     --font-family: 'Roboto', sans-serif;
     --title-color: #161921;
@@ -30,7 +31,6 @@ body {
     line-height: 1.5;
     text-rendering: optimizeSpeed;
     color: var(--text-color);
-    background-color: var(--body-color);
     overflow-x: hidden;
 }
 img,
@@ -73,13 +73,11 @@ a {
 @font-face {
     font-family: DancingScript;
     src: url('/assets/fonts/DancingScript-VariableFont_wght.ttf');
-    font-weight: 700;
 }
 
 @font-face {
     font-family: PlayfairDisplay;
     src: url('/assets/fonts/PlayfairDisplay-VariableFont_wght.ttf');
-    font-weight: 700;
 }
 
 @font-face {

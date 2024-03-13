@@ -5,10 +5,10 @@ import Select, { components } from 'react-select';
 
 const cx = classNames.bind(styles);
 
-export default function Selected({ data, props }) {
+export default function Selected({ data, className, ...props }) {
     const Control = ({ children, ...props }) => (
         <components.Control {...props} className={cx('select')}>
-            {data.icon}
+            {data.icon && data.icon}
             {children}
         </components.Control>
     );
@@ -22,6 +22,7 @@ export default function Selected({ data, props }) {
             options={data.items}
             placeholder={data.title}
             components={{ Control }}
+            className={className}
         />
     );
 }

@@ -17,12 +17,38 @@ import {
     WhatsappLogo,
 } from '@phosphor-icons/react';
 import Button from '~/components/Button';
+import H2Decoration from '~/components/H2Decoration';
 
 const cx = classNames.bind(styles);
 
 export default function Footer() {
     return (
         <div className={cx('footer_wrapper')} style={{ backgroundImage: `url(${images.footer_bg_1})` }}>
+            <div className={cx('form_offer')}>
+                <div className={cx('offer_container')}>
+                    <div
+                        className={cx('offer_background')}
+                        style={{ backgroundImage: `url(${images.subscribe_bg_1})` }}
+                    >
+                        <h2>Get Special Offers And More From Travon</h2>
+                        <p>Sign up now and get the best deals straight in your inbox!</p>
+                        <form className={cx('newsletter_form')}>
+                            <div className={cx('form_group')}>
+                                <input
+                                    className={cx('form_control')}
+                                    type="email"
+                                    placeholder="Email Address"
+                                    required=""
+                                />
+                                <EnvelopeSimple className={cx('form_icon')} color="#687179" weight="fill" />
+                            </div>
+                            <Button className={cx('form_btn')} large primary>
+                                Subscribe
+                            </Button>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div className={cx('container')}>
                 <div className={cx('slogan', 'p_15')}>
                     <Image width={'189px'} src={images.logo} />
@@ -54,7 +80,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className={cx('link', 'p_15')}>
-                    <h2 className={cx('title')}>Quick Links</h2>
+                    <H2Decoration>Quick Links</H2Decoration>
                     <div className={cx('list')}>
                         <Link className={cx('_link')}>
                             <ArrowRight className={cx('arrow_icon')} size={20} weight="bold" />
@@ -79,7 +105,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className={cx('contact', 'p_15')}>
-                    <h2 className={cx('title')}>Contact Us</h2>
+                    <H2Decoration>Contact Us</H2Decoration>
                     <div className={cx('list')}>
                         <div className={cx('contact_item')}>
                             <span className={cx('item_icon')}>
@@ -102,7 +128,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className={cx('recent', 'p_15')}>
-                    <h2 className={cx('title')}>Recent Posts</h2>
+                    <H2Decoration>Recent Posts</H2Decoration>
                     <div className={cx('list')}>
                         <div className={cx('recent_item')}>
                             <Image className={cx('post_img')} animation src={images.about_2_2} />
