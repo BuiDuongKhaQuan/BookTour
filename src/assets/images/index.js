@@ -1,5 +1,6 @@
 const images = {
     logo: require('~/assets/images/logo.png'),
+    iconLogo: require('~/assets/images/icon.png'),
     noImage: require('~/assets/images/no-image.jpg'),
     cloud_1: require('~/assets/images/cloud_1.png'),
     cloud_2: require('~/assets/images/cloud_2.png'),
@@ -56,6 +57,7 @@ const images = {
     tour_4_6: require('~/assets/images/tour_4_6.jpg'),
     contact_shape: require('~/assets/images/contact_shape.png'),
     error_img: require('~/assets/images/error_img.svg').default,
+    hero_bg_2_1: require('~/assets/images/hero_bg_2_1.jpg'),
 };
 
 export default images;
