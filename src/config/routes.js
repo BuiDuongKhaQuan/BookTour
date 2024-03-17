@@ -15,6 +15,12 @@ const routes = {
     error_404: '/404-error',
     gallery: '/gallery',
     login: '/login',
+    //Admin
+    admin: '/admin',
+    admin_tour: '/admin-tour',
+    admin_tour_detail: '/admin-tour-detail',
+    admin_destination: '/admin-destination',
+    admin_destination_detail: '/admin-destination-detail',
 };
 
 export default routes;
