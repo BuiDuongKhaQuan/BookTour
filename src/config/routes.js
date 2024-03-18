@@ -17,10 +17,16 @@ const routes = {
     login: '/login',
     //Admin
     admin: '/admin',
+    admin_account: '/admin-account',
+    admin_account_detail: '/admin-account-detail',
     admin_tour: '/admin-tour',
     admin_tour_detail: '/admin-tour-detail',
     admin_destination: '/admin-destination',
     admin_destination_detail: '/admin-destination-detail',
+    admin_blog: '/admin-blog',
+    admin_blog_detail: '/admin-blog-detail',
+    admin_contact: '/admin-contact',
+    admin_contact_detail: '/admin-contact-detail',
 };
 
 export default routes;

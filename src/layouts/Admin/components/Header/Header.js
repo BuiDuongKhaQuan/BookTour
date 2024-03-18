@@ -4,7 +4,7 @@ import styles from './Header.module.scss';
 import Image from '~/components/Image';
 import images from '~/assets/images';
 import { Link } from 'react-router-dom';
-import { Airplane, BellRinging, BookBookmark, House, MapPin, SignOut } from '@phosphor-icons/react';
+import { Airplane, BellRinging, BookBookmark, House, MapPin, SignOut, UsersThree } from '@phosphor-icons/react';
 
 const cx = classNames.bind(styles);
 
@@ -16,13 +16,18 @@ export default function Header() {
             to: '/admin',
         },
         {
+            title: 'Account',
+            icon: <UsersThree weight="bold" />,
+            to: '/admin-account',
+        },
+        {
             title: 'Destination',
-            icon: <Airplane weight="bold" />,
+            icon: <MapPin weight="bold" />,
             to: '/admin-destination',
         },
         {
             title: 'Tour',
-            icon: <MapPin weight="bold" />,
+            icon: <Airplane weight="bold" />,
             to: '/admin-tour',
         },
 

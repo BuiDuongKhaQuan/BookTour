@@ -1,59 +1,62 @@
 import React, { useMemo } from 'react';
 import classNames from 'classnames/bind';
-import styles from './Tour.module.scss';
+import styles from './Destination.module.scss';
 import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
 import { Box } from '@mui/material';
-import Button from '~/components/Button';
 import { useNavigate } from 'react-router-dom';
 import images from '~/assets/images';
+import Button from '~/components/Button';
 
 const cx = classNames.bind(styles);
-
 const data = [
     {
-        name: 'Bali One Life Adventure',
-        img: images.tour_1_1,
-        position: 'Lasvegus, USA',
-        persion: '52+',
-        day: '07',
-        price: '350',
-        review: 5,
+        name: 'Switzerland',
+        trip: '6+',
+        img: images.dest_2_1,
     },
     {
-        name: 'Places To Travel November',
-        img: images.tour_1_2,
-        position: ' Barcelona, Spain',
-        persion: '100+',
-        day: '13',
-        price: '350',
-        review: 5,
+        name: 'Barcelona',
+        trip: '8+',
+        img: images.dest_2_2,
     },
     {
-        name: 'Brooklyn Beach Resort Tour',
-        img: images.tour_1_3,
-        position: ' Madrid, Spain',
-        persion: '50+',
-        day: '10',
-        price: '650',
-        review: 5,
+        name: 'Amsterdam',
+        trip: '6+',
+        img: images.dest_2_3,
     },
     {
-        name: 'Brooklyn Christmas Lights',
-        img: images.tour_1_4,
-        position: ' Lasvegus, USA',
-        persion: '312+',
-        day: '15',
-        price: '450',
-        review: 5,
+        name: 'Budapest City',
+        trip: '5+',
+        img: images.dest_2_4,
+    },
+    {
+        name: 'Switzerland',
+        trip: '6+',
+        img: images.dest_2_1,
+    },
+    {
+        name: 'Barcelona',
+        trip: '8+',
+        img: images.dest_2_2,
+    },
+    {
+        name: 'Amsterdam',
+        trip: '6+',
+        img: images.dest_2_3,
+    },
+    {
+        name: 'Budapest City',
+        trip: '5+',
+        img: images.dest_2_4,
     },
 ];
-export default function Tour() {
+export default function Destination() {
     const navigation = useNavigate();
     const columns = useMemo(
         () => [
             {
                 accessorKey: 'name', //access nested data with dot notation
-                header: 'Tour Name',
+                header: 'Destination Name',
                 size: 250,
                 Cell: ({ renderedCellValue, row }) => (
                     <Box
@@ -75,24 +78,9 @@ export default function Tour() {
                 ),
             },
             {
-                accessorKey: 'position', //normal accessorKey
-                header: 'Position',
+                accessorKey: 'trip', //normal accessorKey
+                header: 'Trip',
                 size: 200,
-            },
-            {
-                accessorKey: 'persion',
-                header: 'Persion',
-                size: 150,
-            },
-            {
-                accessorKey: 'day',
-                header: 'Day',
-                size: 150,
-            },
-            {
-                accessorKey: 'price',
-                header: 'Price',
-                size: 150,
             },
         ],
         [],
@@ -158,7 +146,7 @@ export default function Tour() {
                     small
                     color="error"
                     disabled={!table.getIsSomeRowsSelected()}
-                    onClick={() => navigation('/admin-tour-detail')}
+                    onClick={() => navigation('/admin-destination-detail')}
                     variant="contained"
                 >
                     Edit Selected Tours
