@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import classNames from 'classnames/bind';
-import styles from './Tour.module.scss';
+import styles from './Blog.module.scss';
 import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
 import { Box } from '@mui/material';
 import Button from '~/components/Button';
@@ -11,49 +11,37 @@ const cx = classNames.bind(styles);
 
 const data = [
     {
-        name: 'Bali One Life Adventure',
         img: images.tour_1_1,
-        position: 'Lasvegus, USA',
-        persion: '52+',
-        day: '07',
-        price: '350',
-        review: 5,
+        time: '21 June, 2024',
+        user: 'admin',
+        content:
+            'Phosfluorescently unleash highly efficient experiences for team driven scenarios. Conveniently enhance cross-unit communities with accurate testing procedures. Dynamically embrace team building expertise. Proactively monetize parallel solutions.',
+        title: 'Get Tips For Making the Most of Your Summer',
     },
     {
-        name: 'Places To Travel November',
-        img: images.tour_1_2,
-        position: ' Barcelona, Spain',
-        persion: '100+',
-        day: '13',
-        price: '350',
-        review: 5,
+        img: images.tour_1_1,
+        time: '21 June, 2024',
+        user: 'admin',
+        content:
+            'Phosfluorescently unleash highly efficient experiences for team driven scenarios. Conveniently enhance cross-unit communities with accurate testing procedures. Dynamically embrace team building expertise. Proactively monetize parallel solutions.',
+        title: 'Get Tips For Making the Most of Your Summer',
     },
     {
-        name: 'Brooklyn Beach Resort Tour',
-        img: images.tour_1_3,
-        position: ' Madrid, Spain',
-        persion: '50+',
-        day: '10',
-        price: '650',
-        review: 5,
-    },
-    {
-        name: 'Brooklyn Christmas Lights',
-        img: images.tour_1_4,
-        position: ' Lasvegus, USA',
-        persion: '312+',
-        day: '15',
-        price: '450',
-        review: 5,
+        img: images.tour_1_1,
+        time: '21 June, 2024',
+        user: 'admin',
+        content:
+            'Phosfluorescently unleash highly efficient experiences for team driven scenarios. Conveniently enhance cross-unit communities with accurate testing procedures. Dynamically embrace team building expertise. Proactively monetize parallel solutions.',
+        title: 'Get Tips For Making the Most of Your Summer',
     },
 ];
-export default function Tour() {
+export default function Blog() {
     const navigation = useNavigate();
     const columns = useMemo(
         () => [
             {
-                accessorKey: 'name', //access nested data with dot notation
-                header: 'Tour Name',
+                accessorKey: 'title', //access nested data with dot notation
+                header: 'Blog Name',
                 size: 250,
                 Cell: ({ renderedCellValue, row }) => (
                     <Box
@@ -75,24 +63,14 @@ export default function Tour() {
                 ),
             },
             {
-                accessorKey: 'position', //normal accessorKey
-                header: 'Position',
+                accessorKey: 'user',
+                header: 'User',
                 size: 200,
             },
             {
-                accessorKey: 'persion',
-                header: 'Persion',
-                size: 150,
-            },
-            {
-                accessorKey: 'day',
-                header: 'Day',
-                size: 150,
-            },
-            {
-                accessorKey: 'price',
-                header: 'Price',
-                size: 150,
+                accessorKey: 'time', //normal accessorKey
+                header: 'Time',
+                size: 200,
             },
         ],
         [],
@@ -135,11 +113,11 @@ export default function Tour() {
                     small
                     color="secondary"
                     onClick={() => {
-                        alert('Create New Tour');
+                        alert('Create New Blog');
                     }}
                     variant="contained"
                 >
-                    Create Tour
+                    Create Blog
                 </Button>
                 <Button
                     primary
@@ -147,21 +125,21 @@ export default function Tour() {
                     color="error"
                     disabled={!table.getIsSomeRowsSelected()}
                     onClick={() => {
-                        alert('Delete Selected Tours');
+                        alert('Delete Selected Blogs');
                     }}
                     variant="contained"
                 >
-                    Delete Selected Tours
+                    Delete Selected Blogs
                 </Button>
                 <Button
                     primary
                     small
                     color="error"
                     disabled={!table.getIsSomeRowsSelected()}
-                    onClick={() => navigation('/admin-tour-detail')}
+                    onClick={() => navigation('/admin-blog-detail')}
                     variant="contained"
                 >
-                    Edit Selected Tours
+                    Edit Selected Blogs
                 </Button>
             </Box>
         ),

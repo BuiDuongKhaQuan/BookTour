@@ -1,5 +1,17 @@
 import config from '~/config';
-import { AdminHome, AdminTour } from '~/pages/Admin';
+import {
+    AdminAccount,
+    AdminAccountDetail,
+    AdminHome,
+    AdminTour,
+    AdminTourDetail,
+    AdminDestination,
+    AdminDestinationDetail,
+    AdminBlog,
+    AdminBlogDetail,
+    AdminContact,
+    AdminContactDetail,
+} from '~/pages/Admin';
 import {
     AboutUs,
     Blog,
@@ -30,10 +42,16 @@ const publicRouters = [
 
 const privateRoutes = [
     { path: config.routes.admin, component: AdminHome },
+    { path: config.routes.admin_account, component: AdminAccount },
+    { path: config.routes.admin_account_detail, component: AdminAccountDetail },
     { path: config.routes.admin_tour, component: AdminTour },
-    { path: config.routes.admin_tour_detail, component: AdminHome },
-    { path: config.routes.admin_destination, component: AdminHome },
-    { path: config.routes.admin_destination_detail, component: AdminHome },
+    { path: config.routes.admin_tour_detail, component: AdminTourDetail },
+    { path: config.routes.admin_destination, component: AdminDestination },
+    { path: config.routes.admin_destination_detail, component: AdminDestinationDetail },
+    { path: config.routes.admin_blog, component: AdminBlog },
+    { path: config.routes.admin_blog_detail, component: AdminBlogDetail },
+    { path: config.routes.admin_contact, component: AdminContact },
+    { path: config.routes.admin_contact_detail, component: AdminContactDetail },
 ];
 
 export { publicRouters, privateRoutes };

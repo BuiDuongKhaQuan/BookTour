@@ -108,3 +108,52 @@ a {
     z-index: 999;
     background-color: rgba(0, 0, 0, 0.432) !important;
 }
+//custom table
+.css-i4bv87-MuiSvgIcon-root {
+    font-size: 25px !important;
+    &:hover {
+        color: var(--primary-color);
+    }
+}
+.css-10gei56 {
+    padding-bottom: 47px;
+}
+.css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input.css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input.css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input {
+    font-size: 15px !important;
+    margin-top: 7px;
+}
+.css-10w330c-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+    font-size: 15px !important;
+    background-color: var(--primary-color) !important;
+    color: var(--white) !important;
+}
+
+.css-g2z002-MuiSvgIcon-root-MuiPaginationItem-icon {
+    font-size: 25px !important;
+}
+
+.css-skcgp8-MuiButtonBase-root-MuiMenuItem-root {
+    &:hover {
+        background-color: var(--primary-color) !important;
+    }
+}
+.css-423ilt-MuiButtonBase-root-MuiMenuItem-root {
+    &:hover {
+        background-color: var(--primary-color) !important;
+    }
+}
+.css-1kq5d21-MuiStack-root,
+.css-cdprif-MuiButtonBase-root-MuiButton-root,
+.css-12yjm75-MuiInputBase-input-MuiOutlinedInput-input,
+.css-423ilt-MuiButtonBase-root-MuiMenuItem-root,
+.css-skcgp8-MuiButtonBase-root-MuiMenuItem-root,
+.css-10w330c-MuiButtonBase-root-MuiPaginationItem-root,
+.css-ja5taz-MuiTooltip-tooltip,
+.css-dahkp-MuiButtonBase-root-MuiMenuItem-root,
+.css-uqq6zz-MuiFormLabel-root-MuiInputLabel-root,
+.css-929hxt-MuiInputBase-input-MuiInput-input {
+    font-size: 1.5rem !important;
+}
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+    font-size: 1.1rem;
+}
