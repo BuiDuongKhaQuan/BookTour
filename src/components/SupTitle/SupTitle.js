@@ -4,9 +4,9 @@ import styles from './SupTitle.module.scss';
 
 const cx = classNames.bind(styles);
 
-export default function SupTitle({ title, left, right, small, primary }) {
+export default function SupTitle({ title, left, right, small, primary, className }) {
     return (
-        <span className={cx('title', primary && 'primary_color')}>
+        <span className={cx('title', primary && 'primary_color', className)}>
             {left && (
                 <span
                     className={cx(

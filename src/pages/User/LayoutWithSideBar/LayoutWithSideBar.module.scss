@@ -9,3 +9,13 @@
     flex-direction: column;
     width: 66%;
 }
+@media (max-width: 1200px) {
+    .tour_container {
+        flex-wrap: wrap;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    .tour_list {
+        width: 100%;
+    }
+}

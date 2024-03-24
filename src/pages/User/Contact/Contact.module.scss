@@ -89,3 +89,22 @@
         text-transform: uppercase;
     }
 }
+@media (max-width: 1200px) {
+    .information {
+        flex-direction: column;
+    }
+    .contact {
+        width: 100% !important;
+    }
+    .map {
+        width: 100% !important;
+        height: 500px;
+    }
+    .map_container {
+        margin: 0 !important;
+        margin-top: 20px !important;
+    }
+    .input_list {
+        flex-direction: column !important;
+    }
+}
