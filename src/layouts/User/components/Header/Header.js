@@ -5,7 +5,7 @@ import 'tippy.js/dist/tippy.css';
 import { Link } from 'react-router-dom';
 import Button from '~/components/Button';
 import config from '~/config';
-import { EnvelopeSimple, FacebookLogo, GoogleLogo, Lock, MagnifyingGlass, User, X } from '@phosphor-icons/react';
+import { EnvelopeSimple, FacebookLogo, GoogleLogo, List, Lock, MagnifyingGlass, User, X } from '@phosphor-icons/react';
 import { useState } from 'react';
 import Modal from 'react-modal';
 import Input from '~/components/Input';
@@ -38,29 +38,24 @@ const MENU = [
 
 Modal.setAppElement('#root');
 function Header() {
-    const [modalIsOpen, setIsOpen] = useState(false);
-    const [modalSearchIsOpen, setSearchIsOpen] = useState(false);
+    const [modalLoginIsOpen, setModalLoginIsOpen] = useState(false);
+    const [modalSearchIsOpen, setModalSearchIsOpen] = useState(false);
+    const [modalMenuIsOpen, setModalMenuIsOpen] = useState(false);
 
     const body = document.body;
-    function openModal() {
-        setIsOpen(true);
-        body.style.overflowY = 'hidden';
-    }
 
-    function closeModal() {
-        setIsOpen(false);
-        body.style.overflowY = 'auto';
-    }
+    const toggleModalLogin = () => {
+        setModalLoginIsOpen(!modalLoginIsOpen);
+        body.style.overflowY = modalLoginIsOpen ? 'auto' : 'hidden';
+    };
+    const toggleModalSearch = () => {
+        setModalSearchIsOpen(!modalSearchIsOpen);
+        body.style.overflowY = modalSearchIsOpen ? 'auto' : 'hidden';
+    };
 
-    function openSearchModal() {
-        setSearchIsOpen(true);
-        body.style.overflowY = 'hidden';
-    }
-
-    function closeSearchModal() {
-        setSearchIsOpen(false);
-        body.style.overflowY = 'auto';
-    }
+    const toggleModalMenu = () => {
+        setModalMenuIsOpen(!modalMenuIsOpen);
+    };
 
     const handleShowLoginForm = () => {
         document.querySelector(`.${cx('login-form')}`).style.display = 'flex';
@@ -82,7 +77,7 @@ function Header() {
         <>
             <div className={cx('login-form')}>
                 <h2>Login</h2>
-                <Button className={cx('btn-close')} onClick={closeModal} circle leftIcon={<X size={20} />} />
+                <Button className={cx('btn-close')} onClick={toggleModalLogin} circle leftIcon={<X size={20} />} />
                 <form className={cx('form')}>
                     <label>Email</label>
                     <Input
@@ -124,7 +119,7 @@ function Header() {
             </div>
             <div className={cx('register-form')}>
                 <h2>Register</h2>
-                <Button className={cx('btn-close')} onClick={closeModal} circle leftIcon={<X size={20} />} />
+                <Button className={cx('btn-close')} onClick={toggleModalLogin} circle leftIcon={<X size={20} />} />
                 <form className={cx('form')}>
                     <label>Name</label>
                     <Input
@@ -173,7 +168,7 @@ function Header() {
             </div>
             <div className={cx('forgot-form')}>
                 <h2>Forgot password</h2>
-                <Button className={cx('btn-close')} onClick={closeModal} circle leftIcon={<X size={20} />} />
+                <Button className={cx('btn-close')} onClick={toggleModalLogin} circle leftIcon={<X size={20} />} />
                 <form className={cx('form')}>
                     <label>Email</label>
                     <Input
@@ -202,7 +197,7 @@ function Header() {
 
     const Search = () => (
         <div className={cx('popup-search-box')}>
-            <Button onClick={closeSearchModal} circle className={cx('searchClose')} leftIcon={<X size={25} />} />
+            <Button onClick={toggleModalSearch} circle className={cx('searchClose')} leftIcon={<X size={25} />} />
 
             <form action="#">
                 <input type="text" placeholder="What are you looking for?" />
@@ -213,9 +208,30 @@ function Header() {
         </div>
     );
 
+    const MobileMenu = () => (
+        <div className={cx('ot-menu-area')}>
+            <Button
+                onClick={toggleModalMenu}
+                circle
+                className={cx('ot-menu-toggle')}
+                leftIcon={<X size={20} weight="bold" />}
+            />
+            <Link to={config.routes.home} className={cx('mobile-logo')}>
+                <img src={images.logo} alt="logo" className={cx('logo_image')} />
+            </Link>
+            <div className={cx('ot-mobile-menu')}>
+                {MENU.map((result, index) => (
+                    <Link to={result.to} className={cx('ot-mobile-menu_item')} key={index}>
+                        <h6>{result.title}</h6>
+                    </Link>
+                ))}
+            </div>
+        </div>
+    );
+
     return (
         <div className={cx('warpper')}>
-            <div className={cx('inner')}>
+            <div className={cx('row')}>
                 <Link to={config.routes.home} className={cx('logo')}>
                     <img src={images.logo} alt="logo" className={cx('logo_image')} />
                 </Link>
@@ -226,30 +242,45 @@ function Header() {
                             <h6>{result.title}</h6>
                         </Link>
                     ))}
+                    <Button
+                        onClick={toggleModalMenu}
+                        className={cx('menu-btn')}
+                        square
+                        primary
+                        leftIcon={<List size={22} weight="bold" />}
+                    />
                 </div>
 
                 <div className={cx('right')}>
                     <Button
-                        onClick={openSearchModal}
+                        onClick={toggleModalSearch}
                         circle
                         leftIcon={<MagnifyingGlass size={20} className={cx('icon')} />}
                     />
-                    <Button onClick={openModal} circle leftIcon={<User size={20} className={cx('icon')} />} />
+                    <Button onClick={toggleModalLogin} circle leftIcon={<User size={20} className={cx('icon')} />} />
                     <Button primary large className={cx('button')}>
                         BOOK YOUR STAY
                     </Button>
                 </div>
                 <Modal
-                    isOpen={modalIsOpen}
-                    onRequestClose={closeModal}
+                    isOpen={modalLoginIsOpen}
+                    onRequestClose={toggleModalLogin}
                     className={cx('modal')}
                     contentLabel="Example Modal"
                 >
                     <Form />
                 </Modal>
                 <Modal
+                    isOpen={modalMenuIsOpen}
+                    onRequestClose={toggleModalMenu}
+                    className={cx('menu')}
+                    contentLabel="Example Modal"
+                >
+                    <MobileMenu />
+                </Modal>
+                <Modal
                     isOpen={modalSearchIsOpen}
-                    onRequestClose={closeSearchModal}
+                    onRequestClose={toggleModalSearch}
                     className={cx('search-modal')}
                     contentLabel="Example Modal"
                 >

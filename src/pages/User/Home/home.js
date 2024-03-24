@@ -356,7 +356,7 @@ function Home() {
         ));
 
     const TourItem = ({ data }) => (
-        <SliderCard slidesToShow={4}>
+        <SliderCard slidesToShowOn1024={2} slidesToShow={4} slidesToShowOn1200={3} slidesToShowOn1450={4}>
             {data.map((reslut, index) => (
                 <TourCardItem data={reslut} key={index} />
             ))}
@@ -418,7 +418,7 @@ function Home() {
     );
 
     const NewItem = ({ data }) => (
-        <SliderCard slidesToShow={3}>
+        <SliderCard slidesToShow={3} slidesToShowOn1024={2} slidesToShowOn1200={2} slidesToShowOn1450={3}>
             {data.map((result, index) => (
                 <div className={cx('new_item')} key={index}>
                     {!!(index % 2) && <Image animation className={cx('new_img')} src={result.img} alt={result.title} />}
@@ -502,13 +502,14 @@ function Home() {
                 <SupTitle left right primary small title={'Categories'} />
                 <h2>Browse By Destination Category</h2>
                 <div className={cx('_row')}>
-                    <SliderCard animation window slides={DATA_SLIDER} slidesToShow={6} />
+                    <SliderCard animation window slides={DATA_SLIDER} slidesToShow={6} slidesToShowOn770={2} />
                 </div>
             </div>
             <div className={cx('aboutus')}>
                 <div className={cx('about_left')}>
                     <div className={cx('about_left_top')}>
-                        <SupTitle right small primary title={'About Us'} />
+                        <SupTitle className={cx('suptitle-max')} right small primary title={'About Us'} />
+                        <SupTitle className={cx('suptitle-1000px')} right left small primary title={'About Us'} />
                         <h2>The Perfect Travel Place For You & Your Family</h2>
                         <p>
                             Progressively impact multidisciplinary leadership skills via e-business leadership skills.
@@ -534,12 +535,12 @@ function Home() {
                 <div className={cx('about_right')}>
                     <div className={cx('right_img1')}>
                         <img src={images.about_2_1} alt="Img" />
-                    </div>
-                    <div className={cx('right_img2')}>
-                        <img src={images.about_2_2} alt="Img" />
-                    </div>
-                    <div className={cx('right_img3')}>
-                        <img src={images.about_shape_2} alt="Img" />
+                        <div className={cx('right_img2')}>
+                            <img className={cx('img2')} src={images.about_2_2} alt="Img" />
+                        </div>
+                        <div className={cx('right_img3')}>
+                            <img src={images.about_shape_2} alt="Img" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -551,6 +552,9 @@ function Home() {
                         animation
                         large
                         tripSmall
+                        slidesToShowOn1024={2}
+                        slidesToShowOn1200={3}
+                        slidesToShowOn1450={4}
                         iconLeftName={<MapPin size={30} weight="fill" color="#3cb371" />}
                         slidesToShow={4}
                         slides={DATA_DESTINATION}
@@ -582,7 +586,8 @@ function Home() {
                 <div className={cx('offers_right')}>
                     <div className={cx('offers_header')}>
                         <div className={cx('header_title')}>
-                            <SupTitle right small title={'Deals & Offers'} />
+                            <SupTitle className={cx('suptitle-max')} right small title={'Deals & Offers'} />
+                            <SupTitle className={cx('suptitle-1000px')} right left small title={'Deals & Offers'} />
                             <h2>Last Minute Amazing Deals</h2>
                         </div>
                         <div className={cx('arrow_list')}>
@@ -605,6 +610,10 @@ function Home() {
                             ref={sliderRef1}
                             slidesToShow={3}
                             animation
+                            slidesToShowOn770={2}
+                            slidesToShowOn1024={2}
+                            slidesToShowOn1200={3}
+                            slidesToShowOn1450={3}
                             large
                             textInImg
                             sellOff

@@ -12,6 +12,10 @@
 
     .p_15 {
         padding: 0 15px;
+        width: 100%;
+        &:not(:last-child) {
+            margin-bottom: 20px;
+        }
     }
 }
 .form_offer {
@@ -201,5 +205,19 @@
         &:hover {
             color: var(--white);
         }
+    }
+}
+@media (max-width: 1200px) {
+    .form_offer {
+        display: none;
+    }
+    .footer_wrapper {
+        margin-top: 0;
+    }
+}
+@media (max-width: 770px) {
+    .container {
+        flex-wrap: wrap;
+        flex-direction: column !important;
     }
 }
