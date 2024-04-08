@@ -9,6 +9,7 @@ import { EnvelopeSimple, FacebookLogo, GoogleLogo, List, Lock, MagnifyingGlass, 
 import { useState } from 'react';
 import Modal from 'react-modal';
 import Input from '~/components/Input';
+import { handleChangeDisplayStyles } from '~/utils/querySelector';
 
 const cx = classNames.bind(styles);
 
@@ -58,19 +59,19 @@ function Header() {
     };
 
     const handleShowLoginForm = () => {
-        document.querySelector(`.${cx('login-form')}`).style.display = 'flex';
-        document.querySelector(`.${cx('register-form')}`).style.display = 'none';
-        document.querySelector(`.${cx('forgot-form')}`).style.display = 'none';
+        handleChangeDisplayStyles(cx('login-form'), 'flex');
+        handleChangeDisplayStyles(cx('register-form'), 'none');
+        handleChangeDisplayStyles(cx('forgot-form'), 'none');
     };
     const handleShowRegisterForm = () => {
-        document.querySelector(`.${cx('login-form')}`).style.display = 'none';
-        document.querySelector(`.${cx('register-form')}`).style.display = 'flex';
-        document.querySelector(`.${cx('forgot-form')}`).style.display = 'none';
+        handleChangeDisplayStyles(cx('login-form'), 'none');
+        handleChangeDisplayStyles(cx('register-form'), 'flex');
+        handleChangeDisplayStyles(cx('forgot-form'), 'none');
     };
     const handleShowForgotForm = () => {
-        document.querySelector(`.${cx('login-form')}`).style.display = 'none';
-        document.querySelector(`.${cx('register-form')}`).style.display = 'none';
-        document.querySelector(`.${cx('forgot-form')}`).style.display = 'flex';
+        handleChangeDisplayStyles(cx('login-form'), 'none');
+        handleChangeDisplayStyles(cx('register-form'), 'none');
+        handleChangeDisplayStyles(cx('forgot-form'), 'flex');
     };
 
     const Form = () => (
