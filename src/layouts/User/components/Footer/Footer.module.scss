@@ -92,6 +92,9 @@
         .fanpage_button {
             background-color: #1e2c46;
             border-color: #1e2c46;
+            &:not(:last-child) {
+                margin-right: 10px;
+            }
         }
     }
 }
