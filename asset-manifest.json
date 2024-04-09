@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/BookTour/static/css/main.e40c6185.css",
-    "main.js": "/BookTour/static/js/main.63e8df9a.js",
+    "main.js": "/BookTour/static/js/main.934f8be8.js",
     "static/js/453.1c82f59a.chunk.js": "/BookTour/static/js/453.1c82f59a.chunk.js",
     "static/media/hero_bg_2_1.jpg": "/BookTour/static/media/hero_bg_2_1.606a0eb30eb776e4647c.jpg",
     "static/media/ceo.jpg": "/BookTour/static/media/ceo.ba8cfb27825a70143b61.jpg",
@@ -66,11 +66,11 @@
     "static/media/slick.woff": "/BookTour/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/BookTour/index.html",
     "main.e40c6185.css.map": "/BookTour/static/css/main.e40c6185.css.map",
-    "main.63e8df9a.js.map": "/BookTour/static/js/main.63e8df9a.js.map",
+    "main.934f8be8.js.map": "/BookTour/static/js/main.934f8be8.js.map",
     "453.1c82f59a.chunk.js.map": "/BookTour/static/js/453.1c82f59a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e40c6185.css",
-    "static/js/main.63e8df9a.js"
+    "static/js/main.934f8be8.js"
   ]
 }
