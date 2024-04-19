@@ -1,5 +1,5 @@
 const routes = {
-    home: '/',
+    home: '/BookTour',
     profile: '/:profile',
     search: '/search',
     destination: '/destination',

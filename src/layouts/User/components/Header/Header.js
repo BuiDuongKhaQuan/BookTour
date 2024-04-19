@@ -2,38 +2,37 @@ import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import images from '~/assets/images';
 import 'tippy.js/dist/tippy.css';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Button from '~/components/Button';
 import config from '~/config';
 import { EnvelopeSimple, FacebookLogo, GoogleLogo, List, Lock, MagnifyingGlass, User, X } from '@phosphor-icons/react';
 import { useState } from 'react';
 import Modal from 'react-modal';
 import Input from '~/components/Input';
-import { handleChangeDisplayStyles } from '~/utils/querySelector';
 
 const cx = classNames.bind(styles);
 
 const MENU = [
     {
         title: 'HOME',
-        to: '/',
+        to: config.routes.home,
     },
     {
         title: 'DESTINATION',
-        to: '/destination',
+        to: config.routes.destination,
     },
     {
         title: 'TOUR',
-        to: '/tour',
+        to: config.routes.tour,
     },
 
     {
         title: 'BLOG',
-        to: '/blog',
+        to: config.routes.blog,
     },
     {
         title: 'CONTACT US',
-        to: '/contact',
+        to: config.routes.contact,
     },
 ];
 
@@ -42,11 +41,17 @@ function Header() {
     const [modalLoginIsOpen, setModalLoginIsOpen] = useState(false);
     const [modalSearchIsOpen, setModalSearchIsOpen] = useState(false);
     const [modalMenuIsOpen, setModalMenuIsOpen] = useState(false);
+    const [showLogin, setShowLogin] = useState(true);
+    const [showRegister, setShowRegister] = useState(false);
+    const [showForgot, setShowForgot] = useState(false);
 
     const body = document.body;
 
     const toggleModalLogin = () => {
         setModalLoginIsOpen(!modalLoginIsOpen);
+        setShowLogin(true);
+        setShowRegister(false);
+        setShowForgot(false);
         body.style.overflowY = modalLoginIsOpen ? 'auto' : 'hidden';
     };
     const toggleModalSearch = () => {
@@ -59,140 +64,146 @@ function Header() {
     };
 
     const handleShowLoginForm = () => {
-        handleChangeDisplayStyles(cx('login-form'), 'flex');
-        handleChangeDisplayStyles(cx('register-form'), 'none');
-        handleChangeDisplayStyles(cx('forgot-form'), 'none');
+        setShowLogin(true);
+        setShowRegister(false);
+        setShowForgot(false);
     };
     const handleShowRegisterForm = () => {
-        handleChangeDisplayStyles(cx('login-form'), 'none');
-        handleChangeDisplayStyles(cx('register-form'), 'flex');
-        handleChangeDisplayStyles(cx('forgot-form'), 'none');
+        setShowLogin(false);
+        setShowRegister(true);
+        setShowForgot(false);
     };
     const handleShowForgotForm = () => {
-        handleChangeDisplayStyles(cx('login-form'), 'none');
-        handleChangeDisplayStyles(cx('register-form'), 'none');
-        handleChangeDisplayStyles(cx('forgot-form'), 'flex');
+        setShowLogin(false);
+        setShowRegister(false);
+        setShowForgot(true);
     };
 
     const Form = () => (
         <>
-            <div className={cx('login-form')}>
-                <h2>Login</h2>
-                <Button className={cx('btn-close')} onClick={toggleModalLogin} circle leftIcon={<X size={20} />} />
-                <form className={cx('form')}>
-                    <label>Email</label>
-                    <Input
-                        type={'email'}
-                        placeholder={'example@gmail.com'}
-                        classNameInput={cx('form-input')}
-                        rightIcon={<EnvelopeSimple size={25} />}
-                    />
-                    <label>Password</label>
-                    <Input
-                        type={'password'}
-                        placeholder={'password'}
-                        classNameInput={cx('form-input')}
-                        rightIcon={<Lock size={25} />}
-                    />
-                    <div className={cx('form-action')}>
-                        <span className={cx('remember')}>
-                            <input type="checkbox" />
-                            Remember me
-                        </span>
-                        <span onClick={handleShowForgotForm} className={cx('action-btn')}>
-                            Forgot password
-                        </span>
+            {showLogin && (
+                <div className={cx('login-form')}>
+                    <h2>Login</h2>
+                    <Button className={cx('btn-close')} onClick={toggleModalLogin} circle leftIcon={<X size={20} />} />
+                    <form className={cx('form')}>
+                        <label>Email</label>
+                        <Input
+                            type={'email'}
+                            placeholder={'example@gmail.com'}
+                            classNameInput={cx('form-input')}
+                            rightIcon={<EnvelopeSimple size={25} />}
+                        />
+                        <label>Password</label>
+                        <Input
+                            type={'password'}
+                            placeholder={'password'}
+                            classNameInput={cx('form-input')}
+                            rightIcon={<Lock size={25} />}
+                        />
+                        <div className={cx('form-action')}>
+                            <span className={cx('remember')}>
+                                <input type="checkbox" />
+                                Remember me
+                            </span>
+                            <span onClick={handleShowForgotForm} className={cx('action-btn')}>
+                                Forgot password
+                            </span>
+                        </div>
+                        <Button className={cx('submit-btn')} primary large>
+                            Login
+                        </Button>
+                    </form>
+                    <div className={cx('login-other')}>
+                        <GoogleLogo />
+                        <FacebookLogo />
                     </div>
-                    <Button className={cx('submit-btn')} primary large>
-                        Login
-                    </Button>
-                </form>
-                <div className={cx('login-other')}>
-                    <GoogleLogo />
-                    <FacebookLogo />
-                </div>
-                <span className={cx('text-link')}>
-                    Do you have account?{' '}
-                    <span onClick={handleShowRegisterForm} className={cx('action-btn')}>
-                        Register
+                    <span className={cx('text-link')}>
+                        Do you have account?{' '}
+                        <span onClick={handleShowRegisterForm} className={cx('action-btn')}>
+                            Register
+                        </span>
                     </span>
-                </span>
-            </div>
-            <div className={cx('register-form')}>
-                <h2>Register</h2>
-                <Button className={cx('btn-close')} onClick={toggleModalLogin} circle leftIcon={<X size={20} />} />
-                <form className={cx('form')}>
-                    <label>Name</label>
-                    <Input
-                        type={'text'}
-                        placeholder={'Tranw'}
-                        classNameInput={cx('form-input')}
-                        rightIcon={<User size={25} />}
-                    />
-                    <label>Email</label>
-                    <Input
-                        type={'email'}
-                        placeholder={'example@gmail.com'}
-                        classNameInput={cx('form-input')}
-                        rightIcon={<EnvelopeSimple size={25} />}
-                    />
-                    <label>Password</label>
-                    <Input
-                        type={'password'}
-                        placeholder={'password'}
-                        classNameInput={cx('form-input')}
-                        rightIcon={<Lock size={25} />}
-                    />
-                    <div className={cx('form-action')}>
-                        <span className={cx('remember')}>
-                            <input type="checkbox" />
-                            Remember me
-                        </span>
-                        <span onClick={handleShowForgotForm} className={cx('action-btn')}>
-                            Forgot password
-                        </span>
+                </div>
+            )}
+            {showRegister && (
+                <div className={cx('register-form')}>
+                    <h2>Register</h2>
+                    <Button className={cx('btn-close')} onClick={toggleModalLogin} circle leftIcon={<X size={20} />} />
+                    <form className={cx('form')}>
+                        <label>Name</label>
+                        <Input
+                            type={'text'}
+                            placeholder={'Tranw'}
+                            classNameInput={cx('form-input')}
+                            rightIcon={<User size={25} />}
+                        />
+                        <label>Email</label>
+                        <Input
+                            type={'email'}
+                            placeholder={'example@gmail.com'}
+                            classNameInput={cx('form-input')}
+                            rightIcon={<EnvelopeSimple size={25} />}
+                        />
+                        <label>Password</label>
+                        <Input
+                            type={'password'}
+                            placeholder={'password'}
+                            classNameInput={cx('form-input')}
+                            rightIcon={<Lock size={25} />}
+                        />
+                        <div className={cx('form-action')}>
+                            <span className={cx('remember')}>
+                                <input type="checkbox" />
+                                Remember me
+                            </span>
+                            <span onClick={handleShowForgotForm} className={cx('action-btn')}>
+                                Forgot password
+                            </span>
+                        </div>
+                        <Button className={cx('submit-btn')} primary large>
+                            Register
+                        </Button>
+                    </form>
+                    <div className={cx('login-other')}>
+                        <GoogleLogo />
+                        <FacebookLogo />
                     </div>
-                    <Button className={cx('submit-btn')} primary large>
-                        Register
-                    </Button>
-                </form>
-                <div className={cx('login-other')}>
-                    <GoogleLogo />
-                    <FacebookLogo />
-                </div>
-                <span className={cx('text-link')}>
-                    Already have an account?{' '}
-                    <span onClick={handleShowLoginForm} className={cx('action-btn')}>
-                        Login
+                    <span className={cx('text-link')}>
+                        Already have an account?{' '}
+                        <span onClick={handleShowLoginForm} className={cx('action-btn')}>
+                            Login
+                        </span>
                     </span>
-                </span>
-            </div>
-            <div className={cx('forgot-form')}>
-                <h2>Forgot password</h2>
-                <Button className={cx('btn-close')} onClick={toggleModalLogin} circle leftIcon={<X size={20} />} />
-                <form className={cx('form')}>
-                    <label>Email</label>
-                    <Input
-                        type={'email'}
-                        placeholder={'example@gmail.com'}
-                        classNameInput={cx('form-input')}
-                        rightIcon={<EnvelopeSimple size={25} />}
-                    />
-                    <Button className={cx('submit-btn')} primary large>
-                        Send
-                    </Button>
-                </form>
-                <div className={cx('login-other')}>
-                    <GoogleLogo />
-                    <FacebookLogo />
                 </div>
-                <span className={cx('text-link')}>
-                    Do you have account?{' '}
-                    <span onClick={handleShowLoginForm} className={cx('action-btn')}>
-                        Login
+            )}
+            {showForgot && (
+                <div className={cx('forgot-form')}>
+                    <h2>Forgot password</h2>
+                    <Button className={cx('btn-close')} onClick={toggleModalLogin} circle leftIcon={<X size={20} />} />
+                    <form className={cx('form')}>
+                        <label>Email</label>
+                        <Input
+                            type={'email'}
+                            placeholder={'example@gmail.com'}
+                            classNameInput={cx('form-input')}
+                            rightIcon={<EnvelopeSimple size={25} />}
+                        />
+                        <Button className={cx('submit-btn')} primary large>
+                            Send
+                        </Button>
+                    </form>
+                    <div className={cx('login-other')}>
+                        <GoogleLogo />
+                        <FacebookLogo />
+                    </div>
+                    <span className={cx('text-link')}>
+                        Do you have account?{' '}
+                        <span onClick={handleShowLoginForm} className={cx('action-btn')}>
+                            Login
+                        </span>
                     </span>
-                </span>
-            </div>
+                </div>
+            )}
         </>
     );
 
@@ -222,7 +233,11 @@ function Header() {
             </Link>
             <div className={cx('ot-mobile-menu')}>
                 {MENU.map((result, index) => (
-                    <Link to={result.to} className={cx('ot-mobile-menu_item')} key={index}>
+                    <Link
+                        to={result.to}
+                        className={(nav) => cx('ot-mobile-menu_item', { active: nav.isActive })}
+                        key={index}
+                    >
                         <h6>{result.title}</h6>
                     </Link>
                 ))}
@@ -239,9 +254,13 @@ function Header() {
 
                 <div className={cx('center')}>
                     {MENU.map((result, index) => (
-                        <Link to={result.to} className={cx('menu_item')} key={index}>
+                        <NavLink
+                            to={result.to}
+                            className={(nav) => cx('menu_item', { active: nav.isActive })}
+                            key={index}
+                        >
                             <h6>{result.title}</h6>
-                        </Link>
+                        </NavLink>
                     ))}
                     <Button
                         onClick={toggleModalMenu}

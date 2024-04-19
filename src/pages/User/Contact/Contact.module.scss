@@ -1,4 +1,4 @@
-.çontact_wrapper {
+.contact_wrapper {
     margin: 0 85px;
     padding: 120px 0;
 }
@@ -106,5 +106,29 @@
     }
     .input_list {
         flex-direction: column !important;
+    }
+}
+@media (max-width: 570px) {
+    .contact_wrapper {
+        margin: 0 5px !important;
+        padding: 50px 0 !important;
+    }
+    .contact_item {
+        h2 {
+            font-size: 20px !important;
+            text-align: left !important;
+        }
+    }
+    .form {
+        padding: 50px 0 !important;
+        h2 {
+            font-size: 26px !important;
+        }
+        .input_list {
+            padding: 0 10px !important;
+        }
+        .text_area {
+            padding: 0 10px !important;
+        }
     }
 }

@@ -534,7 +534,7 @@ function Home() {
                 </div>
                 <div className={cx('about_right')}>
                     <div className={cx('right_img1')}>
-                        <img src={images.about_2_1} alt="Img" />
+                        <img className={cx('img1')} src={images.about_2_1} alt="Img" />
                         <div className={cx('right_img2')}>
                             <img className={cx('img2')} src={images.about_2_2} alt="Img" />
                         </div>
