@@ -21,7 +21,7 @@ export default function Contact() {
     return (
         <>
             <Breadcumb />
-            <div className={cx('çontact_wrapper')}>
+            <div className={cx('contact_wrapper')}>
                 <div className={cx('information')}>
                     <div className={cx('contact')}>
                         <div className={cx('shape-img')}>

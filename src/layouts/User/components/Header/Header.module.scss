@@ -48,6 +48,9 @@
         font-weight: 600;
         font-size: 14px;
     }
+    &.active {
+        color: var(--primary-color);
+    }
 }
 .menu-btn {
     display: none;
@@ -106,10 +109,8 @@
         flex-direction: column;
     }
     .register-form {
-        display: none;
     }
     .forgot-form {
-        display: none;
         h2 {
             margin-top: 20px;
         }
