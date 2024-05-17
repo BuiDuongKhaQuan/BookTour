@@ -1,12 +1,78 @@
 import axios from 'axios';
 
-const repuest = axios.create({
+const request = axios.create({
     baseURL: process.env.REACT_APP_BASE_URL,
+    withCredentials: true, // Bật gửi cookie kèm theo yêu cầu
 });
 
-export const get = async (path, option = {}) => {
-    const response = await repuest.get(path, option);
+export const get = async (path, options = {}) => {
+    const response = await request.get(path, options);
     return response.data;
 };
 
-export default repuest;
+export const register = async (name, email, password) => {
+    try {
+        const response = await request.post('/users/register', {
+            name,
+            email,
+            password,
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const verify = async (email, otp) => {
+    try {
+        const response = await request.put('/users/verify', {
+            otp,
+            email,
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const login = async (email, password) => {
+    try {
+        const response = await request.post('/users/login', {
+            email,
+            password,
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+export const updateUser = async (id, data) => {
+    try {
+        const response = await request.put(`/users/${id}/edit`, data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+export const logout = async () => {
+    try {
+        const response = await request.post('users/logout');
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+export const uploadAvatar = async (formData) => {
+    try {
+        const response = await request.post('/users/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export default request;

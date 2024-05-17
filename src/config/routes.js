@@ -1,6 +1,6 @@
 const routes = {
     home: '/BookTour',
-    profile: '/:profile',
+    profile: '/profile',
     search: '/search',
     destination: '/destination',
     destination_detail: '/destination-details',

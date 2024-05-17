@@ -5,10 +5,12 @@ import 'tippy.js/dist/tippy.css';
 import { Link, NavLink } from 'react-router-dom';
 import Button from '~/components/Button';
 import config from '~/config';
-import { EnvelopeSimple, FacebookLogo, GoogleLogo, List, Lock, MagnifyingGlass, User, X } from '@phosphor-icons/react';
+import { List, MagnifyingGlass, User, X } from '@phosphor-icons/react';
 import { useState } from 'react';
 import Modal from 'react-modal';
-import Input from '~/components/Input';
+import { FormSubmit } from '~/components/Modal';
+import { Avatar } from '@mui/material';
+import routes from '~/config/routes';
 
 const cx = classNames.bind(styles);
 
@@ -41,17 +43,11 @@ function Header() {
     const [modalLoginIsOpen, setModalLoginIsOpen] = useState(false);
     const [modalSearchIsOpen, setModalSearchIsOpen] = useState(false);
     const [modalMenuIsOpen, setModalMenuIsOpen] = useState(false);
-    const [showLogin, setShowLogin] = useState(true);
-    const [showRegister, setShowRegister] = useState(false);
-    const [showForgot, setShowForgot] = useState(false);
-
+    const user = JSON.parse(localStorage.getItem('user'));
     const body = document.body;
 
     const toggleModalLogin = () => {
         setModalLoginIsOpen(!modalLoginIsOpen);
-        setShowLogin(true);
-        setShowRegister(false);
-        setShowForgot(false);
         body.style.overflowY = modalLoginIsOpen ? 'auto' : 'hidden';
     };
     const toggleModalSearch = () => {
@@ -63,154 +59,9 @@ function Header() {
         setModalMenuIsOpen(!modalMenuIsOpen);
     };
 
-    const handleShowLoginForm = () => {
-        setShowLogin(true);
-        setShowRegister(false);
-        setShowForgot(false);
-    };
-    const handleShowRegisterForm = () => {
-        setShowLogin(false);
-        setShowRegister(true);
-        setShowForgot(false);
-    };
-    const handleShowForgotForm = () => {
-        setShowLogin(false);
-        setShowRegister(false);
-        setShowForgot(true);
-    };
-
-    const Form = () => (
-        <>
-            {showLogin && (
-                <div className={cx('login-form')}>
-                    <h2>Login</h2>
-                    <Button className={cx('btn-close')} onClick={toggleModalLogin} circle leftIcon={<X size={20} />} />
-                    <form className={cx('form')}>
-                        <label>Email</label>
-                        <Input
-                            type={'email'}
-                            placeholder={'example@gmail.com'}
-                            classNameInput={cx('form-input')}
-                            rightIcon={<EnvelopeSimple size={25} />}
-                        />
-                        <label>Password</label>
-                        <Input
-                            type={'password'}
-                            placeholder={'password'}
-                            classNameInput={cx('form-input')}
-                            rightIcon={<Lock size={25} />}
-                        />
-                        <div className={cx('form-action')}>
-                            <span className={cx('remember')}>
-                                <input type="checkbox" />
-                                Remember me
-                            </span>
-                            <span onClick={handleShowForgotForm} className={cx('action-btn')}>
-                                Forgot password
-                            </span>
-                        </div>
-                        <Button className={cx('submit-btn')} primary large>
-                            Login
-                        </Button>
-                    </form>
-                    <div className={cx('login-other')}>
-                        <GoogleLogo />
-                        <FacebookLogo />
-                    </div>
-                    <span className={cx('text-link')}>
-                        Do you have account?{' '}
-                        <span onClick={handleShowRegisterForm} className={cx('action-btn')}>
-                            Register
-                        </span>
-                    </span>
-                </div>
-            )}
-            {showRegister && (
-                <div className={cx('register-form')}>
-                    <h2>Register</h2>
-                    <Button className={cx('btn-close')} onClick={toggleModalLogin} circle leftIcon={<X size={20} />} />
-                    <form className={cx('form')}>
-                        <label>Name</label>
-                        <Input
-                            type={'text'}
-                            placeholder={'Tranw'}
-                            classNameInput={cx('form-input')}
-                            rightIcon={<User size={25} />}
-                        />
-                        <label>Email</label>
-                        <Input
-                            type={'email'}
-                            placeholder={'example@gmail.com'}
-                            classNameInput={cx('form-input')}
-                            rightIcon={<EnvelopeSimple size={25} />}
-                        />
-                        <label>Password</label>
-                        <Input
-                            type={'password'}
-                            placeholder={'password'}
-                            classNameInput={cx('form-input')}
-                            rightIcon={<Lock size={25} />}
-                        />
-                        <div className={cx('form-action')}>
-                            <span className={cx('remember')}>
-                                <input type="checkbox" />
-                                Remember me
-                            </span>
-                            <span onClick={handleShowForgotForm} className={cx('action-btn')}>
-                                Forgot password
-                            </span>
-                        </div>
-                        <Button className={cx('submit-btn')} primary large>
-                            Register
-                        </Button>
-                    </form>
-                    <div className={cx('login-other')}>
-                        <GoogleLogo />
-                        <FacebookLogo />
-                    </div>
-                    <span className={cx('text-link')}>
-                        Already have an account?{' '}
-                        <span onClick={handleShowLoginForm} className={cx('action-btn')}>
-                            Login
-                        </span>
-                    </span>
-                </div>
-            )}
-            {showForgot && (
-                <div className={cx('forgot-form')}>
-                    <h2>Forgot password</h2>
-                    <Button className={cx('btn-close')} onClick={toggleModalLogin} circle leftIcon={<X size={20} />} />
-                    <form className={cx('form')}>
-                        <label>Email</label>
-                        <Input
-                            type={'email'}
-                            placeholder={'example@gmail.com'}
-                            classNameInput={cx('form-input')}
-                            rightIcon={<EnvelopeSimple size={25} />}
-                        />
-                        <Button className={cx('submit-btn')} primary large>
-                            Send
-                        </Button>
-                    </form>
-                    <div className={cx('login-other')}>
-                        <GoogleLogo />
-                        <FacebookLogo />
-                    </div>
-                    <span className={cx('text-link')}>
-                        Do you have account?{' '}
-                        <span onClick={handleShowLoginForm} className={cx('action-btn')}>
-                            Login
-                        </span>
-                    </span>
-                </div>
-            )}
-        </>
-    );
-
     const Search = () => (
         <div className={cx('popup-search-box')}>
             <Button onClick={toggleModalSearch} circle className={cx('searchClose')} leftIcon={<X size={25} />} />
-
             <form action="#">
                 <input type="text" placeholder="What are you looking for?" />
                 <button type="submit">
@@ -244,6 +95,36 @@ function Header() {
             </div>
         </div>
     );
+    const stringToColor = (string) => {
+        let hash = 0;
+        let i;
+
+        /* eslint-disable no-bitwise */
+        for (i = 0; i < string.length; i += 1) {
+            hash = string.charCodeAt(i) + ((hash << 5) - hash);
+        }
+
+        let color = '#';
+
+        for (i = 0; i < 3; i += 1) {
+            const value = (hash >> (i * 8)) & 0xff;
+            color += `00${value.toString(16)}`.slice(-2);
+        }
+        return color;
+    };
+
+    const stringAvatar = (name) => {
+        return {
+            sx: {
+                bgcolor: stringToColor(name),
+                width: 55,
+                height: 55,
+                fontSize: 25,
+                cursor: 'pointer',
+            },
+            children: name[0],
+        };
+    };
 
     return (
         <div className={cx('warpper')}>
@@ -277,7 +158,17 @@ function Header() {
                         circle
                         leftIcon={<MagnifyingGlass size={20} className={cx('icon')} />}
                     />
-                    <Button onClick={toggleModalLogin} circle leftIcon={<User size={20} className={cx('icon')} />} />
+                    {user ? (
+                        <Link to={routes.profile}>
+                            <Avatar alt={user.name} src={user.avatar} {...stringAvatar(user.name)} />
+                        </Link>
+                    ) : (
+                        <Button
+                            onClick={toggleModalLogin}
+                            circle
+                            leftIcon={<User size={20} className={cx('icon')} />}
+                        />
+                    )}
                     <Button primary large className={cx('button')}>
                         BOOK YOUR STAY
                     </Button>
@@ -288,7 +179,7 @@ function Header() {
                     className={cx('modal')}
                     contentLabel="Example Modal"
                 >
-                    <Form />
+                    <FormSubmit toggleModalLogin={toggleModalLogin} setCloseModal={toggleModalLogin} />
                 </Modal>
                 <Modal
                     isOpen={modalMenuIsOpen}
