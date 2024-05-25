@@ -32,17 +32,17 @@ export default function CardItem({
                     <Image
                         animation={animation}
                         src={data.img}
-                        alt={data.name}
+                        alt={data.location}
                         className={cx(window ? 'item_img' : 'item_img_square', textInImg && 'backgrond_linear')}
                     />
                 </div>
                 <div className={cx('bottom_img', large && 'transparent', textInImg && 'in_img')}>
                     <Link className={cx('bottom_left')} to={routes.destination_detail}>
                         {iconLeftName && <div className={cx('item_icon')}>{iconLeftName}</div>}
-                        <h3 className={cx('item_name')}>{data.name}</h3>
+                        <h3 className={cx('item_name')}>{data.location}</h3>
                     </Link>
                     <h4 className={cx('item_trip', tripSmall && 'item_trip_small', sellOff && 'sell_off')}>
-                        {data.trip} {sellOff || 'Trips'}
+                        {data.trips} {sellOff || 'Trips'}
                     </h4>
                 </div>
             </div>
