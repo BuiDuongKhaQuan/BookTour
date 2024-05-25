@@ -75,4 +75,22 @@ export const uploadAvatar = async (formData) => {
         throw new Error('Error uploading image: ' + error.message);
     }
 };
+
+export const getDestinations = async () => {
+    try {
+        const response = await request.get('/destinations/all');
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+
+export const getTours = async () => {
+    try {
+        const response = await request.get('/tours');
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
 export default request;
