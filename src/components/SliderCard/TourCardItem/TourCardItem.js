@@ -12,7 +12,7 @@ export default function TourCardItem({ data }) {
         <div>
             <div className={cx('tours_item')}>
                 <div className={cx('tour_img')}>
-                    <Image animation src={data.img ? data.img[0] : ''} alt={data.name} />
+                    <Image animation src={data.imgs ? data.imgs[0] : ''} alt={data.name} />
                     <span className={cx('tour_like')}>
                         <HeartStraight size={20} weight="bold" color="#ffffff" />
                     </span>
