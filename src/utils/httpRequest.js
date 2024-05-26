@@ -84,10 +84,49 @@ export const getDestinations = async () => {
         throw new Error('Error uploading image: ' + error.message);
     }
 };
-
+export const getDestinationsSize = async () => {
+    try {
+        const response = await request.get('/destinations/all-size');
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const getDestinationsLimit = async (start, page) => {
+    try {
+        const response = await request.get(`/destinations?start=${start}&page=${page}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
 export const getTours = async () => {
     try {
         const response = await request.get('/tours');
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const getToursSize = async () => {
+    try {
+        const response = await request.get('/tours/all-size');
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const getToursLimit = async (start, page) => {
+    try {
+        const response = await request.get(`/tours?start=${start}&page=${page}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const book = async (data) => {
+    try {
+        const response = await request.post('/book', data);
         return response.data;
     } catch (error) {
         throw new Error('Error uploading image: ' + error.message);
