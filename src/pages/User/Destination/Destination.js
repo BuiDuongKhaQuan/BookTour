@@ -6,7 +6,7 @@ import Select from '~/components/Select';
 import { MapPin } from '@phosphor-icons/react';
 import Pagination from '~/components/Pagination';
 import { CardItem } from '~/components/SliderCard';
-import { getDestinations } from '~/utils/httpRequest';
+import { getDestinationsLimit, getDestinationsSize } from '~/utils/httpRequest';
 
 const cx = classNames.bind(styles);
 
@@ -43,31 +43,27 @@ const DATA_SELECT = {
 
 export default function Destination() {
     const [destinations, setDestinations] = useState([]);
+    const [destinationsSize, setDestinationsSize] = useState(0);
+    const [itemOffset, setItemOffset] = useState(0);
 
     useEffect(() => {
         const fetchDestinations = async () => {
             try {
-                const response = await getDestinations();
-                setDestinations(response);
+                const response = await getDestinationsLimit(itemOffset, 8);
+                const size = await getDestinationsSize();
+                setDestinations(response.destinations);
+                setDestinationsSize(size);
             } catch (error) {
                 console.log(error);
             }
         };
         fetchDestinations();
-    }, []);
-
-    const [itemOffset, setItemOffset] = useState(0);
-    const endOffset = itemOffset + 4;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    const currentItems = destinations.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(destinations.length / 4);
-
+    }, [itemOffset]);
+    const pageCount = Math.ceil(destinationsSize / 8);
     const handlePageClick = (event) => {
-        const newOffset = (event.selected * 4) % destinations.length;
-        console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
+        const newOffset = event.selected * 8;
         setItemOffset(newOffset);
     };
-
     return (
         <div className={cx('destination_wrapper')}>
             <Breadcumb />
@@ -77,11 +73,12 @@ export default function Destination() {
                     <Select data={DATA_SELECT} />
                 </div>
                 <div className={cx('content')}>
-                    {currentItems.map((result, index) => (
+                    {destinations.map((result, index) => (
                         <CardItem
                             key={index}
                             data={result}
                             animation
+                            destination
                             large
                             tripSmall
                             iconLeftName={<MapPin size={30} weight="fill" color="#3cb371" />}
