@@ -232,8 +232,8 @@ export default function Profile() {
                 const toursCompleted = await Promise.all(toursCompletedPromises);
 
                 setWattingTours(toursWatting);
+                console.log('Completed', toursWatting);
                 setCompletedTours(toursCompleted);
-                console.log('Completed', toursCompleted);
             } catch (error) {
                 console.log(error);
             }
