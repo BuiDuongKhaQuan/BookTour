@@ -108,6 +108,14 @@ export const getTours = async () => {
         throw new Error('Error uploading image: ' + error.message);
     }
 };
+export const findTourById = async (id) => {
+    try {
+        const response = await request.get(`/tours/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
 export const getToursSize = async () => {
     try {
         const response = await request.get('/tours/all-size');
@@ -127,6 +135,22 @@ export const getToursLimit = async (start, page) => {
 export const book = async (data) => {
     try {
         const response = await request.post('/book', data);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const getWattingTour = async () => {
+    try {
+        const response = await request.get('/book/watting');
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const getCompletedTour = async () => {
+    try {
+        const response = await request.get('/book/completed');
         return response.data;
     } catch (error) {
         throw new Error('Error uploading image: ' + error.message);
