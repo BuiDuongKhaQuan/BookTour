@@ -11,6 +11,7 @@ import Modal from 'react-modal';
 import { FormSubmit } from '~/components/Modal';
 import { Avatar } from '@mui/material';
 import routes from '~/config/routes';
+import AvartarCustom from '~/components/AvartarCustom';
 
 const cx = classNames.bind(styles);
 
@@ -160,7 +161,7 @@ function Header() {
                     />
                     {user ? (
                         <Link to={routes.profile}>
-                            <Avatar alt={user.name} src={user.avatar} {...stringAvatar(user.name)} />
+                            <AvartarCustom alt={user.name} src={user.avatar} stringAva={user.name} />
                         </Link>
                     ) : (
                         <Button

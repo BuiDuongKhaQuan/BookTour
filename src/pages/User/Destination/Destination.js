@@ -69,7 +69,7 @@ export default function Destination() {
             <Breadcumb />
             <div className={cx('destination_container')}>
                 <div className={cx('dest_sort_bar')}>
-                    <p>Showing 8 out of 24 destination</p>
+                    <p>Showing 8 out of {destinationsSize} destination</p>
                     <Select data={DATA_SELECT} />
                 </div>
                 <div className={cx('content')}>

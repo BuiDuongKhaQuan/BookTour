@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Profile.module.scss';
 import Image from '~/components/Image';
@@ -12,10 +12,11 @@ import { Camera, EnvelopeSimple, GenderIntersex, MapPin, Phone, User } from '@ph
 import Select from '~/components/Select';
 import Button from '~/components/Button';
 import { TourCardItem } from '~/components/SliderCard';
-import { logout, updateUser, uploadAvatar } from '~/utils/httpRequest';
+import { findTourById, getCompletedTour, getWattingTour, logout, updateUser, uploadAvatar } from '~/utils/httpRequest';
 import { useNavigate } from 'react-router-dom';
 import routes from '~/config/routes';
 import Loading from '~/components/Loading';
+import AvatarCustom from '~/components/AvartarCustom';
 
 const cx = classNames.bind(styles);
 function TabPanel(props) {
@@ -122,14 +123,6 @@ export default function Profile() {
             review: 5,
         },
     ];
-    // const user = {
-    //     name: 'Kha Quan Bui',
-    //     phone: '0328216787',
-    //     email: 'buiduongkhaquan@gmail.com',
-    //     address: '123 Main St',
-    //     booked_tour: DATA_TOURS,
-    //     watting_tour: DATA_TOURS,
-    // };
     const DATA_SELECT = {
         id: 1,
         title: 'Gender',
@@ -159,6 +152,8 @@ export default function Profile() {
     const [selectedOption, setSelectedOption] = useState(null);
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const [wattingTours, setWattingTours] = useState([]);
+    const [completedTours, setCompletedTours] = useState([]);
 
     const fileInputRef = useRef(null);
 
@@ -176,7 +171,6 @@ export default function Profile() {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    console.log(JSON.parse(localStorage.getItem('user')));
     const handleUpdate = async (event) => {
         event.preventDefault();
         try {
@@ -189,8 +183,6 @@ export default function Profile() {
             const newUser = await updateUser(user.id, newData);
             localStorage.setItem('user', JSON.stringify(newUser));
             setAvatar(user.avatar);
-
-            console.log(avatar);
         } catch (error) {
             console.log('Error', error);
         }
@@ -206,7 +198,6 @@ export default function Profile() {
                 ...user,
                 avatar: response.avatar,
             };
-            console.log(avatar);
             localStorage.setItem('user', JSON.stringify(newUser));
         } catch (error) {
             console.error(error.message);
@@ -223,6 +214,33 @@ export default function Profile() {
         } catch (error) {}
     };
 
+    useEffect(() => {
+        const fetchDestinations = async () => {
+            try {
+                const watting = await getWattingTour();
+                const completed = await getCompletedTour();
+                const toursWattingPromises = watting.map(async (booking) => {
+                    const response = await findTourById(booking.id_tour);
+                    return response.tour; // Trả về đối tượng tour
+                });
+                const toursWatting = await Promise.all(toursWattingPromises);
+
+                const toursCompletedPromises = completed.map(async (booking) => {
+                    const response = await findTourById(booking.id_tour);
+                    return response.tour; // Trả về đối tượng tour
+                });
+                const toursCompleted = await Promise.all(toursCompletedPromises);
+
+                setWattingTours(toursWatting);
+                setCompletedTours(toursCompleted);
+                console.log('Completed', toursCompleted);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchDestinations();
+    }, []);
+
     return (
         <div className={cx('wrapper')}>
             {loading && <Loading />}
@@ -231,7 +249,13 @@ export default function Profile() {
                 <div className={cx('row')}>
                     <div className={cx('avatar')}>
                         <div className={cx('avatar-wrap')}>
-                            <Image circle src={user.avatar} alt={'Avatar'} />
+                            <AvatarCustom
+                                alt={'Avatar'}
+                                width={300}
+                                height={300}
+                                src={user.avatar}
+                                stringAva={user.name}
+                            />
                             <span className={cx('camera-icon')} onClick={handleIconClick}>
                                 <Camera weight="bold" />
                             </span>
@@ -306,16 +330,18 @@ export default function Profile() {
                         </TabPanel>
                         <TabPanel value={value} index={1} dir={theme.direction}>
                             <div className={cx('list')}>
-                                {user.watting_tour &&
-                                    user.watting_tour.map((reslut, index) => (
-                                        <TourCardItem data={reslut} key={index} />
+                                {wattingTours &&
+                                    wattingTours.map((reslut, index) => (
+                                        <TourCardItem profileTour data={reslut} key={index} />
                                     ))}
                             </div>
                         </TabPanel>
                         <TabPanel value={value} index={2} dir={theme.direction}>
                             <div className={cx('list')}>
-                                {user.booked_tour &&
-                                    user.booked_tour.map((reslut, index) => <TourCardItem data={reslut} key={index} />)}
+                                {completedTours &&
+                                    completedTours.map((reslut, index) => (
+                                        <TourCardItem profileTour data={reslut} key={index} />
+                                    ))}
                             </div>
                         </TabPanel>
                     </div>

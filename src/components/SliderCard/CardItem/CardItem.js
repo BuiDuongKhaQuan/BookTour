@@ -17,12 +17,14 @@ export default function CardItem({
     animation,
     data,
     destination,
+    categories,
 }) {
     const classes = cx('ssss_item', {
         [className]: className,
         window,
         large,
     });
+    const heightValue = destination ? '374px' : categories ? '210px' : 'auto';
 
     return (
         <div className={classes}>
@@ -30,8 +32,7 @@ export default function CardItem({
                 <div className={cx('img_box')}>
                     {sellOff && <span className={cx('dell')}>{data.sell}</span>}
                     <Image
-                        width={destination && '307px'}
-                        height={destination && '374px'}
+                        height={heightValue}
                         animation={animation}
                         src={data.img}
                         alt={data.name}
@@ -41,9 +42,16 @@ export default function CardItem({
                 <div className={cx('bottom_img', large && 'transparent', textInImg && 'in_img')}>
                     <Link className={cx('bottom_left')} to={`/destination/${data.id}`}>
                         {iconLeftName && <div className={cx('item_icon')}>{iconLeftName}</div>}
-                        <h3 className={cx('item_name')}>{data.name}</h3>
+                        <h3 className={cx('item_name', 'overflow_text')}>{data.name}</h3>
                     </Link>
-                    <h4 className={cx('item_trip', tripSmall && 'item_trip_small', sellOff && 'sell_off')}>
+                    <h4
+                        className={cx(
+                            'item_trip',
+                            'overflow_text',
+                            tripSmall && 'item_trip_small',
+                            sellOff && 'sell_off',
+                        )}
+                    >
                         {`${data.trips}+`} {sellOff || 'Trips'}
                     </h4>
                 </div>
