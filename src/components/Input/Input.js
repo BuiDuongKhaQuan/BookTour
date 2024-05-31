@@ -11,6 +11,7 @@ export default function Input({
     placeholder,
     className,
     classNameInput,
+    classNameIconRight,
     value,
     onChange,
     ...passProps
@@ -25,7 +26,7 @@ export default function Input({
                 className={cx('input', classNameInput)}
                 placeholder={placeholder}
             />
-            {rightIcon && <div className={cx('icon', 'right')}>{rightIcon}</div>}
+            {rightIcon && <div className={cx('icon', 'right', classNameIconRight)}>{rightIcon}</div>}
             {button && button}
         </div>
     );

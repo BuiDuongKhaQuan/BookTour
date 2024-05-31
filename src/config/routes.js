@@ -15,6 +15,8 @@ const routes = {
     error_404: '*',
     gallery: '/gallery',
     login: '/login',
+    payment: '/payment',
+    order: '/order',
     //Admin
     admin: '/admin',
     admin_account: '/admin-account',
