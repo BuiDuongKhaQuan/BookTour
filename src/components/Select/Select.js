@@ -5,9 +5,9 @@ import Select, { components } from 'react-select';
 
 const cx = classNames.bind(styles);
 
-export default function Selected({ data, className, selectedOption, setSelectedOption, placeholder, ...props }) {
+export default function Selected({ data, className, classNameSelect, defaultValue, onChange, placeholder, ...props }) {
     const Control = ({ children, ...props }) => (
-        <components.Control {...props} className={cx('select')}>
+        <components.Control {...props} className={cx('select', classNameSelect)}>
             {data.icon && data.icon}
             {children}
         </components.Control>
@@ -16,8 +16,8 @@ export default function Selected({ data, className, selectedOption, setSelectedO
     return (
         <Select
             {...props}
-            defaultValue={selectedOption}
-            onChange={setSelectedOption}
+            defaultValue={defaultValue}
+            onChange={onChange}
             options={data.items}
             placeholder={placeholder ? placeholder : data.title}
             components={{ Control }}

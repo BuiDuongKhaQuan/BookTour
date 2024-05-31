@@ -37,8 +37,13 @@
     .container {
         display: flex;
         text-align: center;
-        flex-direction: row;
+        flex-direction: column;
         gap: 30px;
+        .fields {
+            display: flex;
+            text-align: center;
+            flex-direction: row;
+        }
         .infor {
             width: 100%;
             .input_list {
@@ -52,10 +57,24 @@
                     border-color: #adadad69;
                 }
             }
-
+        }
+        .information {
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .edit {
+            }
+            .input_list {
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
+                justify-content: center;
+            }
             .btn {
                 font-size: 14px;
                 text-transform: uppercase;
+                padding: 10px;
             }
         }
     }

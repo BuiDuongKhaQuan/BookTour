@@ -25,6 +25,8 @@ import {
     Tour,
     TourDetail,
 } from '~/pages/User';
+import Order from '~/pages/User/Order';
+import Payment from '~/pages/User/Payment';
 
 const publicRouters = [
     { path: config.routes.home, component: Home },
@@ -38,6 +40,8 @@ const publicRouters = [
     { path: config.routes.tour, component: Tour },
     { path: config.routes.tour_detail, component: TourDetail },
     { path: config.routes.error_404, component: Error404 },
+    { path: config.routes.payment, component: Payment },
+    { path: config.routes.order, component: Order },
 ];
 
 const privateRoutes = [

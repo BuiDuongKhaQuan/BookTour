@@ -1,3 +1,4 @@
+import { Email } from '@mui/icons-material';
 import axios from 'axios';
 
 const request = axios.create({
@@ -132,6 +133,15 @@ export const getToursLimit = async (start, page) => {
         throw new Error('Error uploading image: ' + error.message);
     }
 };
+export const updateTour = async (id, data) => {
+    try {
+        const response = await request.post(`/tours/${id}/edit`, data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const book = async (data) => {
     try {
         const response = await request.post('/book', data);
@@ -154,6 +164,42 @@ export const getCompletedTour = async () => {
         return response.data;
     } catch (error) {
         throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const paypalOrder = async (tourId, price) => {
+    try {
+        const data = {
+            cart: [
+                {
+                    id: tourId,
+                    quantity: '1',
+                },
+            ],
+            price,
+        };
+
+        const response = await request.post('/paypal/orders', data);
+
+        return response.data;
+    } catch (error) {
+        throw new Error('Error creating PayPal order: ' + error.message);
+    }
+};
+export const paypalCapture = async (orderID) => {
+    try {
+        const response = await request.post(`/paypal/orders/${orderID}/capture`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const paypalSendMail = async (orderData, email, tourBookedId) => {
+    try {
+        const response = await request.post('/paypal/orders/sendMail', { orderData, email, tourBookedId });
+
+        return response.data;
+    } catch (error) {
+        throw new Error('Error creating PayPal order: ' + error.message);
     }
 };
 export default request;
