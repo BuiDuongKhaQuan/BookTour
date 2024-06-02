@@ -103,7 +103,7 @@ export const getDestinationsLimit = async (start, page) => {
 };
 export const getTours = async () => {
     try {
-        const response = await request.get('/tours');
+        const response = await request.get('/tours/all');
         return response.data;
     } catch (error) {
         throw new Error('Error uploading image: ' + error.message);

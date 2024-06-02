@@ -67,7 +67,7 @@ const DATA_SELECT = {
 
 export default function Payment() {
     const theme = useTheme();
-    const navigation = useNavigate();
+    const navigate = useNavigate();
     const location = useLocation();
     const tourBooked = location.state;
     const user = JSON.parse(sessionStorage.getItem('user'));
@@ -133,7 +133,7 @@ export default function Payment() {
         });
         if (type === 'success') {
             setTimeout(() => {
-                navigation(routes.home);
+                navigate(routes.home);
             }, 5000);
         }
     };

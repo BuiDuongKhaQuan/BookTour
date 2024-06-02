@@ -129,7 +129,7 @@ export default function TourDetail() {
         <LayoutWithSideBar bookBar categoryBar>
             <Information />
             <div className={cx('tour_content')}>
-                <div className={cx('content')} dangerouslySetInnerHTML={{ __html: tour.information }} />
+                <div className="ql-editor" dangerouslySetInnerHTML={{ __html: tour.information }} />
             </div>
             <Review />
         </LayoutWithSideBar>

@@ -1,4 +1,3 @@
-import hljs from 'highlight.js';
 import images from '~/assets/images';
 
 const notification = {

@@ -16,7 +16,8 @@ import { TourCardItem } from '~/components/SliderCard';
 import routes from '~/config/routes';
 import { findTourById, getCompletedTour, getWattingTour, logout, updateUser, uploadAvatar } from '~/utils/httpRequest';
 import styles from './Profile.module.scss';
-
+import { Store } from 'react-notifications-component';
+import { notification } from '~/utils/constants';
 const cx = classNames.bind(styles);
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -65,7 +66,7 @@ export default function Profile() {
     };
 
     const theme = useTheme();
-    const navigation = useNavigate();
+    const navigate = useNavigate();
     const [value, setValue] = useState(0);
     const user = JSON.parse(sessionStorage.getItem('user'));
     const [name, setName] = useState(user ? user.name : '');
@@ -74,11 +75,14 @@ export default function Profile() {
     const [address, setAddress] = useState(user ? user.address : '');
     const [avatar, setAvatar] = useState(user ? user.avatar : '');
     const [gender, setGender] = useState(user ? user.gender : '');
-    const [selectedOption, setSelectedOption] = useState(null);
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [wattingTours, setWattingTours] = useState([]);
     const [completedTours, setCompletedTours] = useState([]);
+    const findSelectedOption = (gender) => {
+        return DATA_SELECT.items.find((item) => item.label.toLowerCase() === gender.toLowerCase());
+    };
+    const [selectedOption, setSelectedOption] = useState(findSelectedOption(gender));
 
     const fileInputRef = useRef(null);
 
@@ -108,8 +112,18 @@ export default function Profile() {
             const newUser = await updateUser(user.id, newData);
             sessionStorage.setItem('user', JSON.stringify(newUser));
             setAvatar(user.avatar);
+            Store.addNotification({
+                ...notification,
+                message: 'Update successful',
+            });
         } catch (error) {
             console.log('Error', error);
+            Store.addNotification({
+                ...notification,
+                title: 'Error',
+                type: 'danger',
+                message: 'Update successful',
+            });
         }
     };
 
@@ -135,7 +149,7 @@ export default function Profile() {
         try {
             await logout();
             sessionStorage.removeItem('user');
-            navigation(routes.home);
+            navigate(routes.home);
         } catch (error) {}
     };
 
@@ -146,19 +160,18 @@ export default function Profile() {
                 const completed = await getCompletedTour();
                 const toursWattingPromises = watting.map(async (booking) => {
                     const response = await findTourById(booking.id_tour);
-                    return response.tour; // Trả về đối tượng tour
+                    return response.data; // Trả về đối tượng tour
                 });
                 const toursWatting = await Promise.all(toursWattingPromises);
 
                 const toursCompletedPromises = completed.map(async (booking) => {
                     const response = await findTourById(booking.id_tour);
-                    return response.tour; // Trả về đối tượng tour
+                    return response.data; // Trả về đối tượng tour
                 });
                 const toursCompleted = await Promise.all(toursCompletedPromises);
 
                 setWattingTours(toursWatting);
                 setCompletedTours(toursCompleted);
-                console.log('Completed', toursCompleted);
             } catch (error) {
                 console.log(error);
             }
@@ -239,10 +252,9 @@ export default function Profile() {
                                     type={'text'}
                                 />
                                 <Select
-                                    selectedOption={selectedOption}
-                                    setSelectedOption={setSelectedOption}
+                                    defaultValue={selectedOption}
+                                    onChange={setSelectedOption}
                                     className={cx('infor-select')}
-                                    placeholder={gender ? gender : 'Gender'}
                                     data={DATA_SELECT}
                                 />
                                 <Button primary large className={cx('btn-submit')} onClick={handleUpdate}>

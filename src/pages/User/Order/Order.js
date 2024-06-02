@@ -15,7 +15,7 @@ const cx = classNames.bind(styles);
 
 export default function Order() {
     const location = useLocation();
-    const navigation = useNavigate();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState(location.state);
     const [tour, setTour] = useState(null);
     const [priceAdult, setPriceAdult] = useState(0);
@@ -25,7 +25,7 @@ export default function Order() {
     useEffect(() => {
         const getTour = async () => {
             const response = await findTourById(formData.id_tour);
-            setTour(response.tour);
+            setTour(response.data);
         };
         getTour();
     }, []);
@@ -86,7 +86,7 @@ export default function Order() {
                         child_quantity: child_quantity.value,
                         total_price: totalPriceByTicket(),
                     });
-                    navigation('/payment', { state: { id: response.id, price: response.total_price } });
+                    navigate('/payment', { state: { id: response.id, price: response.total_price } });
                 } catch (error) {
                     Store.addNotification({
                         ...notification,
