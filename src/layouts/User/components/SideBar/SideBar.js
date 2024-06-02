@@ -27,7 +27,7 @@ export default function SideBar({
     className,
 }) {
     const { id } = useParams();
-    const navigation = useNavigate();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState(
         formDataOrder
             ? formDataOrder
@@ -84,7 +84,7 @@ export default function SideBar({
                     message: 'Vui lòng điền đầy đủ thông tin',
                 });
             } else {
-                navigation('/order', { state: { ...formData, id_tour: id } });
+                navigate('/order', { state: { ...formData, id_tour: id } });
             }
         }
     };

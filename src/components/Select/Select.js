@@ -12,7 +12,6 @@ export default function Selected({ data, className, classNameSelect, defaultValu
             {children}
         </components.Control>
     );
-
     return (
         <Select
             {...props}
