@@ -1,4 +1,8 @@
+import { GenderIntersex } from '@phosphor-icons/react';
+import { GrStatusDisabled } from 'react-icons/gr';
+import { AiOutlineBorderInner } from 'react-icons/ai';
 import images from '~/assets/images';
+import { Store } from 'react-notifications-component';
 
 const notification = {
     title: 'Wonderful!',
@@ -15,6 +19,11 @@ const notification = {
     animationIn: ['animate__animated animate__bounceIn'], // `animate.css v4` classes
     animationOut: ['animate__animated animate__flipOutX'], // `animate.css v4` classes
 };
+const showNotifications = (data) =>
+    Store.addNotification({
+        ...notification,
+        ...data,
+    });
 const initialOptions = {
     'client-id': 'AR1QUPTEt9oj4C3raLjQOGYEGcrFzgWLqHISnrWaX5vFSpT6Vt0sXsndBIqPrEfLuktbyT_rexxOnGO-',
     'enable-funding': 'venmo',
@@ -123,6 +132,74 @@ const DATA_SELECT = [
         ],
     },
 ];
+const DATA_GENDER_SELECT = {
+    id: 1,
+    title: 'Gender',
+    icon: <GenderIntersex weight="bold" size={23} />,
+    items: [
+        {
+            value: '1',
+            label: 'Male',
+        },
+        {
+            value: '2',
+            label: 'Female',
+        },
+    ],
+};
+const DATA_STATUS_SELECT = {
+    id: 1,
+    title: 'Status',
+    icon: <GrStatusDisabled size={23} />,
+    items: [
+        {
+            value: '1',
+            label: 'Posted',
+        },
+        {
+            value: '2',
+            label: 'Not posted',
+        },
+        {
+            value: '3',
+            label: 'Hide',
+        },
+    ],
+};
+const DATA_STATUS_USER_SELECT = {
+    id: 1,
+    title: 'Status',
+    icon: <GrStatusDisabled size={23} />,
+    items: [
+        {
+            value: '1',
+            label: 'Active',
+        },
+        {
+            value: '2',
+            label: 'Not active',
+        },
+        {
+            value: '3',
+            label: 'Lock',
+        },
+    ],
+};
+const DATA_ROLE_SELECT = {
+    id: 1,
+    title: 'Role',
+    icon: <AiOutlineBorderInner size={27} />,
+    items: [
+        {
+            value: '1',
+            label: 'Admin',
+        },
+        {
+            value: '2',
+            label: 'User',
+        },
+    ],
+};
 const toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'], // toggled buttons
     ['blockquote', 'code-block'],
@@ -147,5 +224,37 @@ const toolbarOptions = [
 const modulesQuill = {
     toolbar: toolbarOptions,
 };
+const toTitleCase = (str) => {
+    return str.replace(/\w\S*/g, (txt) => {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+};
+const formattedDate = (date) => {
+    const formatted = date.toLocaleString('vi-VN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+        timeZone: 'UTC',
+    });
+    return toTitleCase(formatted);
+};
 
-export { notification, initialOptions, DATA_CATE, DATA_DEAL, DATA_SELECT, modulesQuill };
+export {
+    notification,
+    initialOptions,
+    DATA_CATE,
+    DATA_DEAL,
+    DATA_SELECT,
+    DATA_STATUS_SELECT,
+    DATA_GENDER_SELECT,
+    DATA_STATUS_USER_SELECT,
+    DATA_ROLE_SELECT,
+    modulesQuill,
+    toTitleCase,
+    formattedDate,
+    showNotifications,
+};

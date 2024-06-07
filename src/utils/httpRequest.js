@@ -1,4 +1,3 @@
-import { Email } from '@mui/icons-material';
 import axios from 'axios';
 
 const request = axios.create({
@@ -10,7 +9,22 @@ export const get = async (path, options = {}) => {
     const response = await request.get(path, options);
     return response.data;
 };
-
+export const getUsers = async () => {
+    try {
+        const response = await request.get('/users/all');
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const findUserById = async (id) => {
+    try {
+        const response = await request.get(`/users/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
 export const register = async (name, email, password) => {
     try {
         const response = await request.post('/users/register', {
@@ -85,6 +99,14 @@ export const getDestinations = async () => {
         throw new Error('Error uploading image: ' + error.message);
     }
 };
+export const findDestinationById = async (id) => {
+    try {
+        const response = await request.get(`/destinations/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
 export const getDestinationsSize = async () => {
     try {
         const response = await request.get('/destinations/all-size');
@@ -99,6 +121,18 @@ export const getDestinationsLimit = async (start, page) => {
         return response.data;
     } catch (error) {
         throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const updateDestination = async (id, data) => {
+    try {
+        const response = await request.post(`/destinations/${id}/edit`, data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
     }
 };
 export const getTours = async () => {
@@ -141,7 +175,38 @@ export const updateTour = async (id, data) => {
         throw error;
     }
 };
-
+export const deleteImgTour = async (data) => {
+    try {
+        const response = await request.post(`/tours/image`, data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+export const updateImgTour = async (data) => {
+    try {
+        const response = await request.post(`/tours/update-image`, data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+export const addImgTour = async (id, data) => {
+    try {
+        const response = await request.post(`/tours/${id}/add-image`, data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
 export const book = async (data) => {
     try {
         const response = await request.post('/book', data);
@@ -200,6 +265,47 @@ export const paypalSendMail = async (orderData, email, tourBookedId) => {
         return response.data;
     } catch (error) {
         throw new Error('Error creating PayPal order: ' + error.message);
+    }
+};
+
+export const getBlogs = async () => {
+    try {
+        const response = await request.get('/blogs/all');
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const findBlogById = async (id) => {
+    try {
+        const response = await request.get(`/blogs/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const updateBlog = async (id, data) => {
+    try {
+        const response = await request.post(`/blogs/${id}/edit`, data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+export const createBlog = async (data) => {
+    try {
+        const response = await request.post(`/blogs`, data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
     }
 };
 export default request;
