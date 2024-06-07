@@ -1,3 +1,4 @@
+import { create } from '@mui/material/styles/createTransitions';
 import config from '~/config';
 import {
     AdminAccount,
@@ -54,6 +55,10 @@ const privateRoutes = [
     { path: config.routes.admin_destination_detail, component: AdminDestinationDetail },
     { path: config.routes.admin_blog, component: AdminBlog },
     { path: config.routes.admin_blog_detail, component: AdminBlogDetail },
+    {
+        path: config.routes.admin_blog_create,
+        component: (props) => <AdminBlogDetail {...props} create={true} />,
+    },
     { path: config.routes.admin_contact, component: AdminContact },
     { path: config.routes.admin_contact_detail, component: AdminContactDetail },
 ];

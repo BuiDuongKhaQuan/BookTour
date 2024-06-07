@@ -20,15 +20,16 @@ const routes = {
     //Admin
     admin: '/admin',
     admin_account: '/admin-account',
-    admin_account_detail: '/admin-account-detail',
+    admin_account_detail: '/admin-account/:id',
     admin_tour: '/admin-tour',
-    admin_tour_detail: '/admin-tour-detail',
+    admin_tour_detail: '/admin-tour/:id',
     admin_destination: '/admin-destination',
-    admin_destination_detail: '/admin-destination-detail',
+    admin_destination_detail: '/admin-destination/:id',
     admin_blog: '/admin-blog',
-    admin_blog_detail: '/admin-blog-detail',
+    admin_blog_detail: '/admin-blog/:id',
+    admin_blog_create: '/admin-blog-create',
     admin_contact: '/admin-contact',
-    admin_contact_detail: '/admin-contact-detail',
+    admin_contact_detail: '/admin-contact/:id',
 };
 
 export default routes;

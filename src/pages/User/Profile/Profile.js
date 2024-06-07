@@ -1,11 +1,10 @@
 import { useTheme } from '@emotion/react';
-import { AppBar, Box, Tab, Tabs } from '@mui/material';
-import { Camera, EnvelopeSimple, GenderIntersex, MapPin, Phone, User } from '@phosphor-icons/react';
+import { AppBar, Tab, Tabs } from '@mui/material';
+import { Camera, EnvelopeSimple, MapPin, Phone, User } from '@phosphor-icons/react';
 import classNames from 'classnames/bind';
-import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
+import { Store } from 'react-notifications-component';
 import { useNavigate } from 'react-router-dom';
-import images from '~/assets/images';
 import AvatarCustom from '~/components/AvartarCustom';
 import Breadcumb from '~/components/Breadcumb';
 import Button from '~/components/Button';
@@ -14,32 +13,11 @@ import Loading from '~/components/Loading';
 import Select from '~/components/Select';
 import { TourCardItem } from '~/components/SliderCard';
 import routes from '~/config/routes';
+import { DATA_GENDER_SELECT, notification } from '~/utils/constants';
 import { findTourById, getCompletedTour, getWattingTour, logout, updateUser, uploadAvatar } from '~/utils/httpRequest';
 import styles from './Profile.module.scss';
-import { Store } from 'react-notifications-component';
-import { notification } from '~/utils/constants';
+import TabPanel from '~/components/TabPanel';
 const cx = classNames.bind(styles);
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`full-width-tabpanel-${index}`}
-            aria-labelledby={`full-width-tab-${index}`}
-            {...other}
-        >
-            {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-        </div>
-    );
-}
-
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
-};
 
 function a11yProps(index) {
     return {
@@ -49,22 +27,6 @@ function a11yProps(index) {
 }
 
 export default function Profile() {
-    const DATA_SELECT = {
-        id: 1,
-        title: 'Gender',
-        icon: <GenderIntersex weight="bold" />,
-        items: [
-            {
-                value: '1',
-                label: 'Male',
-            },
-            {
-                value: '2',
-                label: 'Female',
-            },
-        ],
-    };
-
     const theme = useTheme();
     const navigate = useNavigate();
     const [value, setValue] = useState(0);
@@ -80,7 +42,7 @@ export default function Profile() {
     const [wattingTours, setWattingTours] = useState([]);
     const [completedTours, setCompletedTours] = useState([]);
     const findSelectedOption = (gender) => {
-        return DATA_SELECT.items.find((item) => item.label.toLowerCase() === gender.toLowerCase());
+        return DATA_GENDER_SELECT.items.find((item) => item.label.toLowerCase() === gender.toLowerCase());
     };
     const [selectedOption, setSelectedOption] = useState(findSelectedOption(gender));
 
@@ -255,7 +217,7 @@ export default function Profile() {
                                     defaultValue={selectedOption}
                                     onChange={setSelectedOption}
                                     className={cx('infor-select')}
-                                    data={DATA_SELECT}
+                                    data={DATA_GENDER_SELECT}
                                 />
                                 <Button primary large className={cx('btn-submit')} onClick={handleUpdate}>
                                     UPDATE
