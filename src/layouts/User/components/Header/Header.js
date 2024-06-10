@@ -92,6 +92,13 @@ function Header() {
                         <h6>{result.title}</h6>
                     </Link>
                 ))}
+                {user ? (
+                    <Link to={routes.profile}>
+                        <AvartarCustom alt={user.name} src={user.avatar.url} stringAva={user.name} />
+                    </Link>
+                ) : (
+                    <Button onClick={toggleModalLogin} circle leftIcon={<User size={20} className={cx('icon')} />} />
+                )}
             </div>
         </div>
     );
@@ -130,7 +137,7 @@ function Header() {
                     />
                     {user ? (
                         <Link to={routes.profile}>
-                            <AvartarCustom alt={user.name} src={user.avatar} stringAva={user.name} />
+                            <AvartarCustom alt={user.name} src={user.avatar.url} stringAva={user.name} />
                         </Link>
                     ) : (
                         <Button
