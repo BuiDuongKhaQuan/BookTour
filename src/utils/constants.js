@@ -5,7 +5,7 @@ import images from '~/assets/images';
 import { Store } from 'react-notifications-component';
 
 const notification = {
-    title: 'Wonderful!',
+    title: 'Successfully!',
     message: 'Configurable',
     type: 'success',
     insert: 'top',
@@ -153,15 +153,15 @@ const DATA_STATUS_SELECT = {
     icon: <GrStatusDisabled size={23} />,
     items: [
         {
-            value: '1',
+            value: 1,
             label: 'Posted',
         },
         {
-            value: '2',
+            value: 2,
             label: 'Not posted',
         },
         {
-            value: '3',
+            value: 3,
             label: 'Hide',
         },
     ],
@@ -172,15 +172,15 @@ const DATA_STATUS_USER_SELECT = {
     icon: <GrStatusDisabled size={23} />,
     items: [
         {
-            value: '1',
+            value: 1,
             label: 'Active',
         },
         {
-            value: '2',
+            value: 2,
             label: 'Not active',
         },
         {
-            value: '3',
+            value: 3,
             label: 'Lock',
         },
     ],
@@ -242,7 +242,13 @@ const formattedDate = (date) => {
     });
     return toTitleCase(formatted);
 };
-
+const getTodayDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+};
 export {
     notification,
     initialOptions,
@@ -257,4 +263,5 @@ export {
     toTitleCase,
     formattedDate,
     showNotifications,
+    getTodayDate,
 };

@@ -17,6 +17,14 @@ export const getUsers = async () => {
         throw new Error('Error uploading image: ' + error.message);
     }
 };
+export const updateRoles = async (userId, selectedRoles) => {
+    try {
+        const response = await request.put(`/users/${userId}/roles`, { roles: selectedRoles });
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
 export const findUserById = async (id) => {
     try {
         const response = await request.get(`/users/${id}`);
@@ -58,12 +66,17 @@ export const login = async (email, password) => {
         });
         return response.data;
     } catch (error) {
+        console.error('Error during login:', error.response || error.message || error);
         throw error;
     }
 };
 export const updateUser = async (id, data) => {
     try {
-        const response = await request.put(`/users/${id}/edit`, data);
+        const response = await request.put(`/users/${id}/edit`, data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
         return response.data;
     } catch (error) {
         throw error;
@@ -75,19 +88,6 @@ export const logout = async () => {
         return response.data;
     } catch (error) {
         throw error;
-    }
-};
-export const uploadAvatar = async (formData) => {
-    try {
-        const response = await request.post('/users/upload', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
-
-        return response.data;
-    } catch (error) {
-        throw new Error('Error uploading image: ' + error.message);
     }
 };
 
@@ -123,9 +123,21 @@ export const getDestinationsLimit = async (start, page) => {
         throw new Error('Error uploading image: ' + error.message);
     }
 };
+export const createDestination = async (data) => {
+    try {
+        const response = await request.post(`/destinations`, data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
 export const updateDestination = async (id, data) => {
     try {
-        const response = await request.post(`/destinations/${id}/edit`, data, {
+        const response = await request.put(`/destinations/${id}/edit`, data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -135,6 +147,16 @@ export const updateDestination = async (id, data) => {
         throw error;
     }
 };
+
+export const deleteDestination = async (id) => {
+    try {
+        const response = await request.delete(`/destinations/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+
 export const getTours = async () => {
     try {
         const response = await request.get('/tours/all');
@@ -146,6 +168,14 @@ export const getTours = async () => {
 export const findTourById = async (id) => {
     try {
         const response = await request.get(`/tours/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const deleteTour = async (id) => {
+    try {
+        const response = await request.delete(`/tours/${id}`);
         return response.data;
     } catch (error) {
         throw new Error('Error uploading image: ' + error.message);
@@ -173,6 +203,18 @@ export const updateTour = async (id, data) => {
         return response.data;
     } catch (error) {
         throw error;
+    }
+};
+export const createTour = async (data) => {
+    try {
+        const response = await request.post(`/tours`, data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
     }
 };
 export const deleteImgTour = async (data) => {
@@ -286,7 +328,7 @@ export const findBlogById = async (id) => {
 };
 export const updateBlog = async (id, data) => {
     try {
-        const response = await request.post(`/blogs/${id}/edit`, data, {
+        const response = await request.put(`/blogs/${id}/edit`, data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -308,4 +350,231 @@ export const createBlog = async (data) => {
         throw new Error('Error uploading image: ' + error.message);
     }
 };
+export const deleteBlog = async (id) => {
+    try {
+        const response = await request.delete(`/blogs/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+
+export const getBlogSize = async () => {
+    try {
+        const response = await request.get('/blogs/all-size');
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const getBlogLimit = async (start, page) => {
+    try {
+        const response = await request.get(`/blogs?start=${start}&page=${page}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+
+//Contact
+export const getContacts = async () => {
+    try {
+        const response = await request.get('/contacts/all');
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const findContactById = async (id) => {
+    try {
+        const response = await request.get(`/contacts/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const updateContact = async (id, data) => {
+    try {
+        const response = await request.post(`/contacts/${id}/edit`, data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+export const createContact = async (data) => {
+    try {
+        const response = await request.post(`/contacts`, data);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const answerContact = async (id, data) => {
+    try {
+        const response = await request.put(`/contacts/${id}/answer`, data);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const deleteContact = async (id) => {
+    try {
+        const response = await request.delete(`/contacts/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+
+export const getContactSize = async () => {
+    try {
+        const response = await request.get('/contacts/all-size');
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const getContactLimit = async (start, page) => {
+    try {
+        const response = await request.get(`/contacts?start=${start}&page=${page}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+
+//Ticket
+export const getTickets = async () => {
+    try {
+        const response = await request.get('/tickets/all');
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const findTicketById = async (id) => {
+    try {
+        const response = await request.get(`/tickets/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const updateTicket = async (id, data) => {
+    try {
+        const response = await request.put(`/tickets/${id}/edit`, data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+export const createTicket = async (data) => {
+    try {
+        const response = await request.post(`/tickets`, data);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const answerTicket = async (id, data) => {
+    try {
+        const response = await request.put(`/tickets/${id}/answer`, data);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const deleteTicket = async (id) => {
+    try {
+        const response = await request.delete(`/tickets/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+
+export const getTicketSize = async () => {
+    try {
+        const response = await request.get('/tickets/all-size');
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const getTicketLimit = async (start, page) => {
+    try {
+        const response = await request.get(`/tickets?start=${start}&page=${page}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+
+//Deals
+export const getDeals = async () => {
+    try {
+        const response = await request.get('/deals/all');
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const findDealsById = async (id) => {
+    try {
+        const response = await request.get(`/deals/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const updateDeals = async (id, data) => {
+    try {
+        const response = await request.put(`/deals/${id}/edit`, data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+export const createDeals = async (data) => {
+    try {
+        const response = await request.post(`/deals`, data);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const answerDeals = async (id, data) => {
+    try {
+        const response = await request.put(`/deals/${id}/answer`, data);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const deleteDeals = async (id) => {
+    try {
+        const response = await request.delete(`/deals/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+
+export const getDealsSize = async () => {
+    try {
+        const response = await request.get('/deals/all-size');
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+export const getDealsLimit = async (start, page) => {
+    try {
+        const response = await request.get(`/deals?start=${start}&page=${page}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error uploading image: ' + error.message);
+    }
+};
+
 export default request;
