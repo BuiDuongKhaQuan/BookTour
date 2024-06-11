@@ -1,9 +1,4 @@
-import classNames from 'classnames/bind';
-import styles from './AvatarCustom.module.scss';
-import React from 'react';
 import { Avatar } from '@mui/material';
-
-const cx = classNames.bind(styles);
 
 export default function AvatarCustom({ alt, src, stringAva, width = 55, height = 55, passProps }) {
     const stringToColor = (string) => {

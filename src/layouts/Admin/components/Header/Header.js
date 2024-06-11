@@ -7,6 +7,7 @@ import styles from './Header.module.scss';
 import routes from '~/config/routes';
 import { IoTicketOutline } from 'react-icons/io5';
 import { MdOutlineLocalOffer } from 'react-icons/md';
+import { FaRegBuilding } from 'react-icons/fa';
 
 const cx = classNames.bind(styles);
 
@@ -16,6 +17,11 @@ export default function Header() {
             title: 'Dashboard',
             icon: <House weight="bold" />,
             to: routes.admin,
+        },
+        {
+            title: 'Company',
+            icon: <FaRegBuilding />,
+            to: routes.admin_company,
         },
         {
             title: 'Account',

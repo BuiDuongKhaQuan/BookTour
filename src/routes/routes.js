@@ -15,6 +15,7 @@ import {
     AdminTicketDetail,
     AdminDeals,
     AdminDealsDetail,
+    AdminCompany,
 } from '~/pages/Admin';
 import {
     AboutUs,
@@ -82,8 +83,9 @@ const privateRoutes = [
     { path: config.routes.admin_deals_detail, component: AdminDealsDetail },
     {
         path: config.routes.admin_deals_create,
-        component: (props) => <AdminTicketDetail {...props} create={true} />,
+        component: (props) => <AdminDealsDetail {...props} create={true} />,
     },
+    { path: config.routes.admin_company, component: AdminCompany },
 ];
 
 export { publicRouters, privateRoutes };

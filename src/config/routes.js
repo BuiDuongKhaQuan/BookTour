@@ -38,6 +38,7 @@ const routes = {
     admin_deals: '/admin-deals',
     admin_deals_detail: '/admin-deals/:id',
     admin_deals_create: '/admin-deals/create',
+    admin_company: '/admin-company',
 };
 
 export default routes;
