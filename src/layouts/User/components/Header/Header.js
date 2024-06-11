@@ -10,7 +10,7 @@ import { useState } from 'react';
 import Modal from 'react-modal';
 import { FormSubmit } from '~/components/Modal';
 import routes from '~/config/routes';
-import AvartarCustom from '~/components/AvartarCustom';
+import AvatarCustom from '~/components/AvatarCustom';
 
 const cx = classNames.bind(styles);
 
@@ -44,6 +44,7 @@ function Header() {
     const [modalSearchIsOpen, setModalSearchIsOpen] = useState(false);
     const [modalMenuIsOpen, setModalMenuIsOpen] = useState(false);
     const user = JSON.parse(sessionStorage.getItem('user'));
+    const company = JSON.parse(sessionStorage.getItem('company'));
     const body = document.body;
 
     const toggleModalLogin = () => {
@@ -80,7 +81,7 @@ function Header() {
                 leftIcon={<X size={20} weight="bold" />}
             />
             <Link to={config.routes.home} className={cx('mobile-logo')}>
-                <img src={images.logo} alt="logo" className={cx('logo_image')} />
+                <img src={company.logo} alt="logo" className={cx('logo_image')} />
             </Link>
             <div className={cx('ot-mobile-menu')}>
                 {MENU.map((result, index) => (
@@ -94,7 +95,7 @@ function Header() {
                 ))}
                 {user ? (
                     <Link to={routes.profile}>
-                        <AvartarCustom alt={user.name} src={user.avatar.url} stringAva={user.name} />
+                        <AvatarCustom alt={user.name} src={user.avatar.url} stringAva={user.name} />
                     </Link>
                 ) : (
                     <Button onClick={toggleModalLogin} circle leftIcon={<User size={20} className={cx('icon')} />} />
@@ -137,7 +138,7 @@ function Header() {
                     />
                     {user ? (
                         <Link to={routes.profile}>
-                            <AvartarCustom alt={user.name} src={user.avatar.url} stringAva={user.name} />
+                            <AvatarCustom alt={user.name} src={user.avatar.url} stringAva={user.name} />
                         </Link>
                     ) : (
                         <Button

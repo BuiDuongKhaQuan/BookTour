@@ -53,7 +53,6 @@ export default function SideBar({
                   ticket: {},
               },
     );
-    console.log(formDataOrder);
     useEffect(() => {
         if (onFormDataChange) {
             onFormDataChange(formData);
