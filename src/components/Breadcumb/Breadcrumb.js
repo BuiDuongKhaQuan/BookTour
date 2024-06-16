@@ -8,7 +8,7 @@ import routes from '~/config/routes';
 
 const cx = classNames.bind(styles);
 
-export default function Breadcumb({ backgroundImage = images.breadcumb_bg, breadcumb_wrapper = 'Home' }) {
+export default function Breadcrumb({ backgroundImage = images.breadcumb_bg, breadcumb_wrapper = 'Home' }) {
     const location = useLocation();
     const titlePage = location.pathname.substring(1).replace(/\/\d+/, '');
     return (
