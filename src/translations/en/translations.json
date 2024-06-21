@@ -1,0 +1,9 @@
+{
+    "common": {
+        "home": "Home",
+        "destination": "Destination",
+        "tour": "Tour",
+        "blog": "Blog",
+        "contact us": "ContactUs"
+    }
+}
